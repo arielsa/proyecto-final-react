@@ -6,6 +6,7 @@ import React from 'react';
 import { PelisList } from './PelisList';
 import {Peli} from './Peli';
 import { PelisVistasList } from './PelisVistasList';
+import { ApiList } from './ApiList';
 
 const urlImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAaMa3ir58raQ9jobi4_LIFoc8dBQQDGiJyA&usqp=CAU';
 
@@ -32,6 +33,8 @@ function App() {
         (<Peli key={peli.id} title={peli.title} url={peli.url}/>))
       }
     </PelisList>
+
+    <ApiList pelis={pelis} />
 
     
     </React.Fragment>
