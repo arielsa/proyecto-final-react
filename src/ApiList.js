@@ -3,6 +3,7 @@ import './ApiList.css'
 
 function ApiList (props){
     //console.log(props) 
+    const URL_IMAGE = "https://image.tmdb.org/t/p/original";
     
     return(
         <React.Fragment>
@@ -17,7 +18,7 @@ function ApiList (props){
 
                     <div className=" poster-cont " >
                         <img
-                        src={peli.url}
+                        src={`${URL_IMAGE + peli.poster_path}`}
                         alt=""
                         height={400}
                         className=" "                        
