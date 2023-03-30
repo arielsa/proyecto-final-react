@@ -72,7 +72,7 @@ useEffect(() => {
 }, []);
 
 
-const [listaSelecionada, setListaSeleccionada]=useState(pelisLanzamientos)
+const [listaSelecionada, setListaSeleccionada]=useState(pelisPopulares)
 
 let pelisSeleccionadas = listaSelecionada;
 
