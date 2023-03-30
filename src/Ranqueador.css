@@ -1,0 +1,39 @@
+:root{
+    --colorPredominante:#F8F8FF;
+    --colorAcentos:#718AF4;
+    --colorAcentoDark:#454655;
+    --colorSecundario:#C2C4EE;
+    --coloreSubdominate: #E6F4F1;
+    --colorAlerta:#00BFCA;
+    --colorAlerta2:#4EEDFD;
+
+}
+
+.rank{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:transparent;
+}
+.rankeador-box{
+    position: relative;
+    background: var(--colorPredominante);
+    padding: 2px 5px 3px;
+    border-radius: 5px;
+
+}
+
+.rankeador-box .stars{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.stars i{
+    color: var(--colorAcentoDark);
+    cursor:pointer;
+
+}
+
+i.active{
+    color: var(--colorAlerta);
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import './PelisList.css'
 
 function PelisList (props){
     return(

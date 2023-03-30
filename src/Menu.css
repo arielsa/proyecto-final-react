@@ -1,0 +1,20 @@
+:root{
+    --colorPredominante:#F8F8FF;
+    --colorAcentos:#718AF4;
+    --colorAcentoDark:#454655;
+    --colorSecundario:#C2C4EE;
+    --coloreSubdominate: #E6F4F1;
+    --colorAlerta:#00BFCA;
+    --colorAlerta2:#4EEDFD;
+
+}
+.log{
+    color: var(--colorAlerta);
+}
+.log2{
+    color: var(--colorAcentos);
+}
+
+body{
+    color:var(--colorAcentoDark);
+}
