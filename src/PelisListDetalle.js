@@ -1,11 +1,11 @@
 import React from 'react'
-import './PelisList.css'
+import './PelisListDetalle.css'
 
-function PelisList (props){
+function PelisListDetalle (props){
     return(
         <React.Fragment>
             
-                <ul>
+                <ul className= {"opcion1 " + props.visibilidad} >
                 {props.children}
                 </ul>
             
@@ -17,4 +17,4 @@ function PelisList (props){
     )
 
 }
-export{PelisList}
+export{PelisListDetalle}

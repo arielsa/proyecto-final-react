@@ -5,8 +5,11 @@ import {Ranqueador} from './Ranqueador.js'
 const urlImage = 'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71niXI3lxlL._SY679_.jpg';
 
 function Peli (props){
+               
     return(    
-    <React.Fragment>    
+    <React.Fragment>
+
+
         
         <li>
             <div className="container card m-3 m-lg-5">
@@ -18,7 +21,9 @@ function Peli (props){
                             <h2 className="text-center">{props.title}</h2>
                             <p className="text-center" >{props.overview}</p>            
                             <div>
-                                <h2><span> <i class="fa-solid fa-circle-check icon "></i></span></h2>
+                                <h2><span onClick={ () => {
+                                  console.log('abrir modal desde peli con detalle');
+                                } }  > <i class="fa-solid fa-circle-check icon "></i></span></h2>
                             </div>
                             <Ranqueador/>
                             

@@ -1,0 +1,8 @@
+.poster-cont{
+    display: grid;
+    justify-items: center;
+}
+
+.icon{
+    cursor: pointer;
+}

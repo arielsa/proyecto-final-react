@@ -35,11 +35,10 @@ function Ranqueador (){
             </div>
         </div>
         
-
-        {/* <i className="fa-solid fa-bars"></i>
-        <i className="fas fa-th-large"></i>
-        <i className="fa-solid fa-grid-2"></i>
-        <i className="fa-solid fa-list"></i>
+{/* 
+        <i className="fa-solid fa-bars"></i>
+        
+        
         <i className="fa-solid fa-circle-up"></i>
         <i className="fa-solid fa-circle-down"></i>
         <i className="fa-solid fa-gear"></i>

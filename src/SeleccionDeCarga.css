@@ -8,17 +8,12 @@
     --colorAlerta2:#4EEDFD;
 
 }
-.log{
-    color: var(--colorAlerta);
-}
-.log2{
+
+.icono-seleccionador {
     color: var(--colorAcentos);
 }
 
-body{
-    color:var(--colorAcentoDark);
+.icono-seleccionador:hover{
+    color: var(--colorAlerta2);
 }
 
-.selec{
-    cursor: pointer;
-}
