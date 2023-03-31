@@ -71,23 +71,36 @@ const fetchpelisNowPaying = async () => {
 
 //busqueda y captura:
 
-const [busqueda, setBusqueda]=useState('')
+// const [busqueda, setBusqueda]=useState([])
+// const [busquedaAux, setBusquedaAux] = useState('a')
 
+// let valor='fatal'
+// async function fetchpelisBuscadas () {
+  
+//   const {data:{results},} = await axios.get(`${API_URL}/search/upcoming`,
+//   {params: {api_key: API_KEY, language:'es', query:valor },} 
+//   )
+//   setBusqueda(results);   
+// }
 
+/////////////////square
 useEffect(() => {
   fetchpelisPopulares();
-  
+  //fetchpelisBuscadas();
   fetchpelisNowPaying();
   
 }, []);
 
-
+/////////////////selecccionador de lista
 const [listaSelecionada, setListaSeleccionada]=useState(pelisPopulares)
 
 let pelisSeleccionadas = listaSelecionada;
 
+function seleccionador (seleccion){
+  setListaSeleccionada(seleccion); 
+}
 
-
+////////////////seleccionador de modo de visualizacion
 const [modoDeLista, setModoDeListado]= useState('sin-detalle')
 
 function SelecionarModoDeVista (modo){
@@ -96,16 +109,14 @@ function SelecionarModoDeVista (modo){
 
 const visibilidad = modoDeLista;
 
-function seleccionador (seleccion){
-  setListaSeleccionada(seleccion); 
-}
 
+////////////////////////////////////////////////////////return
   return (
     <React.Fragment>    
 
     <Menu2  seleccionador={seleccionador}  populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
 
-    <SearchPelis seleccionador={seleccionador} busqueda={busqueda}/>
+    <SearchPelis seleccionador={seleccionador} />{/*//////////busqueda///////// */}
     
     <SeleccionDeCarga SelecionarModoDeVista={SelecionarModoDeVista} />   
 
