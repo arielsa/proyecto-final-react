@@ -3,19 +3,20 @@ import {useState, useEffect} from 'react';
 import React from 'react';
 import axios from 'axios';
 
-
+///////////importacion de componentes
 import './App.css';
 import { Menu2 } from './Menu.js';
 import { SearchPelis } from './SearchPelis.js'; 
-import { PelisListDetalle } from './PelisListDetalle';
-import {Peli} from './Peli';
-import { PelisVistasList } from './PelisVistasList';
-import { ApiList } from './ApiList';
-import { Ranqueador } from './Ranqueador';
-import {SeleccionDeCarga} from './SeleccionDeCarga'
+import { PelisListDetalle } from './PelisListDetalle.js';
+import {Peli} from './Peli.js';
+import { PelisVistasList } from './PelisVistasList.js';
+import { ApiList } from './ApiList.js';
+import { Ranqueador } from './Ranqueador.js';
+import {SeleccionDeCarga} from './SeleccionDeCarga.js'
+import { EstadoDeBusqueda } from './EstadoDeBusqueda.js';
 
-const urlImage = 'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71niXI3lxlL._SY679_.jpg';
-const urlImage2 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc4lZo5jSUNnXP7KX1S98SkLTjEP7E_3HByA&usqp=CAU';
+//const urlImage = 'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71niXI3lxlL._SY679_.jpg';
+//const urlImage2 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc4lZo5jSUNnXP7KX1S98SkLTjEP7E_3HByA&usqp=CAU';
 
 // const pelisPopulares = [
 //   {id:1, title:'peli 1' , url:urlImage, overview:'esta pelis bla bla bla', rank:null},
@@ -45,69 +46,93 @@ const URL_IMAGE = "https://image.tmdb.org/t/p/original";
 
 function App() {
 
-//pelis populares:
+  //pelis populares:
 
-const [pelisPopulares, setpelisPopulares] = useState([]);
+  const [pelisPopulares, setpelisPopulares] = useState([]);
 
-const fetchpelisPopulares = async () => {
-  const {data:{results},} = await axios.get(`${API_URL}/movie/popular`,
-  {params: {api_key: API_KEY, language:'es' },}
-  )
-  setpelisPopulares(results);   
-}
+  const fetchpelisPopulares = async () => {
+    const {data:{results},} = await axios.get(`${API_URL}/movie/popular`,
+    {params: {api_key: API_KEY, language:'es' },}
+    )
+    setpelisPopulares(results);   
+  }
 
 
 
-// en cartelera:
+  // en cartelera:
 
-const [pelisNowPaying, setpelisNowPaying] = useState([]);
+  const [pelisNowPaying, setpelisNowPaying] = useState([]);
 
-const fetchpelisNowPaying = async () => {
-  const {data:{results},} = await axios.get(`${API_URL}/movie/upcoming`,
-  {params: {api_key: API_KEY, language:'es' },} 
-  )
-  setpelisNowPaying(results);   
-}
+  const fetchpelisNowPaying = async () => {
+    const {data:{results},} = await axios.get(`${API_URL}/movie/upcoming`,
+    {params: {api_key: API_KEY, language:'es' },} 
+    )
+    setpelisNowPaying(results);   
+  }
 
-//busqueda y captura:
+  /////////////////////////////busqueda y captura:
 
-// const [busqueda, setBusqueda]=useState([])
-// const [busquedaAux, setBusquedaAux] = useState('a')
+  // const [busqueda, setBusqueda]=useState([])
+  // const [busquedaAux, setBusquedaAux] = useState('a')
 
-// let valor='fatal'
-// async function fetchpelisBuscadas () {
-  
-//   const {data:{results},} = await axios.get(`${API_URL}/search/upcoming`,
-//   {params: {api_key: API_KEY, language:'es', query:valor },} 
-//   )
-//   setBusqueda(results);   
-// }
+  // let valor='fatal'
+  // async function fetchpelisBuscadas () {
+    
+  //   const {data:{results},} = await axios.get(`${API_URL}/search/upcoming`,
+  //   {params: {api_key: API_KEY, language:'es', query:valor },} 
+  //   )
+  //   setBusqueda(results);   
+  // }
+  const [estadoBusqueda, setEstadoBusqueda ] = useState('')
+  const [valorBusqueda, setValorBusqueda] = useState('')
+  const [valorResultado, setValorResultado]=useState([])
 
-/////////////////square
-useEffect(() => {
-  fetchpelisPopulares();
-  //fetchpelisBuscadas();
-  fetchpelisNowPaying();
-  
-}, []);
+  const onSearchValue = (evento) => {
+  // console.log(evento.target.value);
+    //props.seleccionador(props.busqueda(evento.target.value));
+    //props.seleccionador(props.busqueda)
+    setValorBusqueda(evento.target.value);
+    fetchpelisSearch();
+    valorResultado.length > 1 ?  seleccionador(valorResultado) : setEstadoBusqueda ('No se encontro, vuelva a intentarlo');
+    valorResultado.length < 1 ?  seleccionador(valorResultado) : setEstadoBusqueda ('')
+    //console.log(valorResultado);         
+  } 
+  let encoded = valorBusqueda;
 
-/////////////////selecccionador de lista
-const [listaSelecionada, setListaSeleccionada]=useState(pelisPopulares)
+  const fetchpelisSearch = async () => {
+      const {data:{results},} = await axios.get(`${API_URL}/search/movie`,
+      {params: {api_key: API_KEY, language:'es', query:encoded },} 
+      )
+      setValorResultado(results);   
+  }
 
-let pelisSeleccionadas = listaSelecionada;
 
-function seleccionador (seleccion){
-  setListaSeleccionada(seleccion); 
-}
+  /////////////////queue
+  useEffect(() => {
+    fetchpelisPopulares();
+    //fetchpelisBuscadas();
+    fetchpelisNowPaying();
+    fetchpelisSearch();
+    
+  }, []);
 
-////////////////seleccionador de modo de visualizacion
-const [modoDeLista, setModoDeListado]= useState('sin-detalle')
+  /////////////////selecccionador de lista
+  const [listaSelecionada, setListaSeleccionada]=useState(pelisPopulares)
 
-function SelecionarModoDeVista (modo){
-          setModoDeListado(modo)
-}
+  let pelisSeleccionadas = listaSelecionada;
 
-const visibilidad = modoDeLista;
+  function seleccionador (seleccion){
+    setListaSeleccionada(seleccion); 
+  }
+
+  ////////////////seleccionador de modo de visualizacion
+  const [modoDeLista, setModoDeListado]= useState('sin-detalle')
+
+  function SelecionarModoDeVista (modo){
+            setModoDeListado(modo)
+  }
+
+  const visibilidad = modoDeLista;
 
 
 ////////////////////////////////////////////////////////return
@@ -116,7 +141,9 @@ const visibilidad = modoDeLista;
 
     <Menu2  seleccionador={seleccionador}  populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
 
-    <SearchPelis seleccionador={seleccionador} />{/*//////////busqueda///////// */}
+    <SearchPelis seleccionador={seleccionador} onSearchValue={onSearchValue} />
+
+    <EstadoDeBusqueda estado={estadoBusqueda} />
     
     <SeleccionDeCarga SelecionarModoDeVista={SelecionarModoDeVista} />   
 

@@ -9,45 +9,41 @@ const API_KEY = "c495d91754fd32409ac24c38c41473ca";
 const URL_IMAGE = "https://image.tmdb.org/t/p/original";
 
 
-    const [valorBusqueda, setValorBusqueda] = useState('')
-    const [valorResultado, setValorResultado]=useState('')
+    const [pelisTrending, setpelisTrending] = useState([]);
 
-    const onSearchValue = (evento) => {
-        console.log(evento.target.value);
-        //props.seleccionador(props.busqueda(evento.target.value));
-        //props.seleccionador(props.busqueda)
-        setValorBusqueda(evento.target.value);
-        fetchpelisSearch();
-        props.seleccionador(valorResultado);
-        console.log(valorResultado);
+    const fetchpelisTrending = async () => {
+      const {data:{results},} = await axios.get(`${API_URL}/trending/movie/day`,
+      {params: {api_key: API_KEY, language:'es' },}
+      )
+      setpelisTrending(results);
+      
+      
+         
     }
 
-    let encoded = valorBusqueda;
-
-
-    const fetchpelisSearch = async () => {
-        const {data:{results},} = await axios.get(`${API_URL}/search/movie`,
-        {params: {api_key: API_KEY, language:'es', query:encoded },} 
-        )
-        setValorResultado(results);   
+    const trendingClickeado = ()=>{
+       
+        props.seleccionador(pelisTrending)
     }
 
     useEffect(() => {
-        fetchpelisSearch();        
+        fetchpelisTrending();
       }, []);
 
     return(    
         <div className="input-group mb-3 m-2" >
             <div className="input-group-prepend">
-                <button className="btn btn-outline-primary" type="button">Random</button>
+                <button className="btn btn-outline-primary" type="button"
+                onClick={trendingClickeado} 
+                >trending top</button>
             </div>
             <input 
-                onChange={onSearchValue}   
+                onChange={props.onSearchValue}   
                 className="form-control PelisSearch " 
                 placeholder="buscar pelicula"  
-                aria-describedby="basic-addon1"
-                 
+                aria-describedby="basic-addon1"                 
             />
+            
         </div>
     )
 
