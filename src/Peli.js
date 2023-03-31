@@ -23,7 +23,7 @@ function Peli (props){
                             <div>
                                 <h2><span onClick={ () => {
                                   console.log('abrir modal desde peli con detalle');
-                                } }  > <i class="fa-solid fa-circle-check icon "></i></span></h2>
+                                } }  > <i class="fas fa-window-restore icon "></i></span></h2>
                             </div>
                             <Ranqueador/>
                             

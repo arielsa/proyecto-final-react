@@ -22,3 +22,12 @@ body{
 .selec{
     cursor: pointer;
 }
+
+span{
+    color: var(--colorAcentoDark);
+    cursor: pointer;
+}
+span:hover{
+    color: var(--colorAcentos);
+    text-decoration:underline;
+}

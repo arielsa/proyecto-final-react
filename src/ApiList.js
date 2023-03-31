@@ -28,7 +28,7 @@ function ApiList (props){
                     <h4 className="text-center">{peli.title}</h4>
                     <h2><span onClick={ () => {
                                   console.log('abrir modal desde peli sin detalle');
-                                } } > <i class="fa-solid fa-circle-check icon "></i></span></h2>
+                                } } > <i class="fas fa-window-restore icon "></i></span></h2>
                     </div>
                     
                 ))}

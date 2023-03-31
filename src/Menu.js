@@ -9,10 +9,12 @@ function Menu2 (props){
         props.seleccionador(props.populares)
     }
     
-    function selecionLanzamientos(){
+
+
+    function selecionEnCartelera(){
         //console.log('pelis populares');
        // console.log(props.populares);
-        props.seleccionador(props.lanzamientos)
+        props.seleccionador(props.enCartelera)
     }
 
 
@@ -23,8 +25,9 @@ function Menu2 (props){
                 <span className="mx-3 selec ">vistas</span>
                 <span className="mx-3 selec ">proxima a ver</span>
                 <span className="mx-3 selec ">volver a ver</span>
-                <span onClick={selecionLanzamientos} className="mx-3 selec">ultimos lanzamientos</span>
-                <span onClick={selecionPopulares} className="mx-3 selec ">populares</span>
+                
+                <span onClick={selecionPopulares} className="mx-3 selec "><i class="fas fa-search-plus"></i> populares</span>
+                <span onClick={selecionEnCartelera} className="mx-3 selec "><i class="fas fa-search-plus"></i> estrenos</span>
             </div>
         </div>
     )

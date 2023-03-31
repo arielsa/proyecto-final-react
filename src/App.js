@@ -25,13 +25,13 @@ const urlImage2 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc4lZo5
 //   {id:5, title:'peli 5' , url:urlImage, overview:'esta pelis bla bla bla', rank:null},
 // ]
 
-const pelisLanzamientos = [
-  {id:1, title:'peli 1' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
-  {id:2, title:'peli 2 ', url:urlImage2, overview:'esta pelis bla bla bla', rank:null },
-  {id:3, title:'peli 3' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
-  {id:4, title:'peli 4' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
-  {id:5, title:'peli 5' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
-]
+//const pelisLanzamientos = [
+//  {id:1, title:'peli 1' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
+//  {id:2, title:'peli 2 ', url:urlImage2, overview:'esta pelis bla bla bla', rank:null },
+//  {id:3, title:'peli 3' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
+//  {id:4, title:'peli 4' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
+//  {id:5, title:'peli 5' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
+//]
 //prueba de consumo de API:
 
 const API_URL = "https://api.themoviedb.org/3";
@@ -45,30 +45,40 @@ const URL_IMAGE = "https://image.tmdb.org/t/p/original";
 
 function App() {
 
-//prueba de consumo de API:
+//pelis populares:
 
 const [pelisPopulares, setpelisPopulares] = useState([]);
 
 const fetchpelisPopulares = async () => {
   const {data:{results},} = await axios.get(`${API_URL}/movie/popular`,
-  {params: {api_key: API_KEY, },}
+  {params: {api_key: API_KEY, language:'es' },}
   )
   setpelisPopulares(results);   
 }
 
-const [pelisUpComing, setpelisUpComing] = useState([]);
 
-const fetchpelisUpComing = async () => {
+
+// en cartelera:
+
+const [pelisNowPaying, setpelisNowPaying] = useState([]);
+
+const fetchpelisNowPaying = async () => {
   const {data:{results},} = await axios.get(`${API_URL}/movie/upcoming`,
-  {params: {api_key: API_KEY, },}
+  {params: {api_key: API_KEY, language:'es' },} 
   )
-  setpelisUpComing(results);   
+  setpelisNowPaying(results);   
 }
+
+//busqueda y captura:
+
+const [busqueda, setBusqueda]=useState('')
+
 
 useEffect(() => {
   fetchpelisPopulares();
-  fetchpelisUpComing();
-  console.log(pelisPopulares);
+  
+  fetchpelisNowPaying();
+  
 }, []);
 
 
@@ -93,9 +103,9 @@ function seleccionador (seleccion){
   return (
     <React.Fragment>    
 
-    <Menu2  seleccionador={seleccionador}  populares={pelisPopulares} lanzamientos={pelisUpComing} />
+    <Menu2  seleccionador={seleccionador}  populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
 
-    <SearchPelis/>
+    <SearchPelis seleccionador={seleccionador} busqueda={busqueda}/>
     
     <SeleccionDeCarga SelecionarModoDeVista={SelecionarModoDeVista} />   
 

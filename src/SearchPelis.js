@@ -3,7 +3,7 @@ import axios from 'axios';
 import {useState,useEffect} from 'react';
 import './SearchPelis.css'
 
-function SearchPelis (){
+function SearchPelis (props){
 
     const [valorBusqueda, setValorBusqueda] = useState('')
 
