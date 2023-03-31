@@ -70,6 +70,21 @@ function App() {
     setpelisNowPaying(results);   
   }
 
+  // trending:
+  const [pelisTrending, setpelisTrending] = useState([]);
+
+  const fetchpelisTrending = async () => {
+    const {data:{results},} = await axios.get(`${API_URL}/trending/movie/day`,
+    {params: {api_key: API_KEY, language:'es' },}
+    )
+    setpelisTrending(results);
+    
+    
+       
+  }
+
+
+
   /////////////////////////////busqueda y captura:
 
   // const [busqueda, setBusqueda]=useState([])
@@ -110,7 +125,7 @@ function App() {
   /////////////////queue
   useEffect(() => {
     fetchpelisPopulares();
-    //fetchpelisBuscadas();
+    fetchpelisTrending();
     fetchpelisNowPaying();
     fetchpelisSearch();
     
@@ -141,7 +156,7 @@ function App() {
 
     <Menu2  seleccionador={seleccionador}  populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
 
-    <SearchPelis seleccionador={seleccionador} onSearchValue={onSearchValue} />
+    <SearchPelis seleccionador={seleccionador} onSearchValue={onSearchValue} pelisTrending={pelisTrending}/>
 
     <EstadoDeBusqueda estado={estadoBusqueda} />
     
