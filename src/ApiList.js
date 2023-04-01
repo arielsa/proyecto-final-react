@@ -21,6 +21,7 @@ function ApiList (props){
                     <div className=" poster-cont " >
                         <img
                         src={ props.renderApi ? `${URL_IMAGE + peli.poster_path}`: peli.url}
+                        
                         alt=""
                         height={400}
                         className=" "                        
@@ -28,10 +29,12 @@ function ApiList (props){
 
                     </div>                    
                     <h4 className="text-center">
-                        <span onClick={ () => {
+                        <span onClick={ () => {console.log('1');
                                     props.setRanking(0)
                                     props.setFormAux(true);
-                                    peli.url=`${URL_IMAGE + peli.poster_path}`;
+                                    console.log(peli.url);
+                                    
+                                    if(props.renderApi) { peli.url=`${URL_IMAGE + peli.poster_path}`}///////// 
                                     props.setPeliAGuardar (peli);
                                 } } > <i className="fas fa-window-restore icon "></i></span>
                     {peli.title}</h4>

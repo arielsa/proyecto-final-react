@@ -198,7 +198,7 @@ function App() {
 
     </div>
 
-    <FormAux filtroDeIntroduccion={filtroDeIntroduccion} listAux={listAux} CargarListAux={CargarListAux} setRanking={setRanking} ranking={ranking} formAux={formAux} setFormAux={setFormAux} peliAGuardar={peliAGuardar}  />
+    <FormAux renderApi={renderApi} filtroDeIntroduccion={filtroDeIntroduccion} listAux={listAux} CargarListAux={CargarListAux} setRanking={setRanking} ranking={ranking} formAux={formAux} setFormAux={setFormAux} peliAGuardar={peliAGuardar}  />
 
     <div> {/*renderizado de API */}
           <PelisListDetalle visibilidad={visibilidad}> 

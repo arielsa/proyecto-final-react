@@ -5,11 +5,14 @@ import { useState } from 'react';
 
 function FormAux(props){
 
+    //props.renderApi (es true en mis listas personales)
     //props.formAux
     const[mensajePeliRepetida, setMensajePeliRepetida  ]  = useState('')
     let title = props.peliAGuardar.title;
     let id = props.peliAGuardar.id;
-    let url= props.peliAGuardar.url;
+    let url= props.peliAGuardar.url
+    ////////////////////////////
+    console.log(url);
     let overview=props.peliAGuardar.overview;
     const [starIndex, setStarIndex]=useState(0)
     //props.setRanking(starIndex)
