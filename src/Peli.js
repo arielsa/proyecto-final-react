@@ -22,10 +22,12 @@ function Peli (props){
                             <p className="text-center" >{props.overview}</p>            
                             <div>
                                 <h2><span onClick={ () => {
-                                  console.log('abrir modal desde peli con detalle');
+                                    props.setRanking(0)
+                                    props.setPeliAGuardar(props);
+                                    props.setFormAux(true);                                  
                                 } }  > <i class="fas fa-window-restore icon "></i></span></h2>
                             </div>
-                            <Ranqueador/>
+                            {/* <Ranqueador/> */}
                             
                         </div>  
                                                     

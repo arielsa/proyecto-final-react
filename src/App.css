@@ -52,3 +52,7 @@
 .opcion2.con-detalle{
   display: none;
 }
+
+.inactive{
+  display:none;
+}

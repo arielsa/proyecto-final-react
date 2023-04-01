@@ -14,6 +14,7 @@ import { ApiList } from './ApiList.js';
 import { Ranqueador } from './Ranqueador.js';
 import {SeleccionDeCarga} from './SeleccionDeCarga.js'
 import { EstadoDeBusqueda } from './EstadoDeBusqueda.js';
+import { FormAux } from './FormAux';
 
 //const urlImage = 'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71niXI3lxlL._SY679_.jpg';
 //const urlImage2 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc4lZo5jSUNnXP7KX1S98SkLTjEP7E_3HByA&usqp=CAU';
@@ -148,13 +149,23 @@ function App() {
   }
 
   const visibilidad = modoDeLista;
+  /////////////////////////////////////////creando en storage lista aux
+  const [formAux, setFormAux]=useState(false)///prender/apagar
+  const [peliAGuardar, setPeliAGuardar] = useState([])
+  const [ranking, setRanking] = useState ();
+
+  ///formAux === true? setRankig(0);
+
+
+
 
 
 ////////////////////////////////////////////////////////return
   return (
-    <React.Fragment>    
+    <React.Fragment>
 
-    <Menu2  seleccionador={seleccionador}  populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
+      <div>
+      <Menu2  seleccionador={seleccionador}  populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
 
     <SearchPelis seleccionador={seleccionador} onSearchValue={onSearchValue} pelisTrending={pelisTrending}/>
 
@@ -162,17 +173,17 @@ function App() {
     
     <SeleccionDeCarga SelecionarModoDeVista={SelecionarModoDeVista} />   
 
-    {/* <Ranqueador/> */}
+      </div>
 
-    {/* <PelisVistasList/> */}
+    <FormAux setRanking={setRanking} ranking={ranking} formAux={formAux} setFormAux={setFormAux} peliAGuardar={peliAGuardar}  />
 
     <PelisListDetalle visibilidad={visibilidad}> 
       {pelisSeleccionadas.map (peli =>
-        (<Peli key={peli.id} title={peli.title} url={`${URL_IMAGE + peli.poster_path}`} overview={peli.overview}/>))
+        (<Peli setFormAux={setFormAux} setRanking={setRanking}  setPeliAGuardar={setPeliAGuardar} key={peli.id} id={peli.id} title={peli.title} url={`${URL_IMAGE + peli.poster_path}`} overview={peli.overview}/>))
       }
     </PelisListDetalle>
 
-    <ApiList pelis={pelisSeleccionadas}  visibilidad={visibilidad} />
+    <ApiList setPeliAGuardar={setPeliAGuardar} setRanking={setRanking} setFormAux={setFormAux} pelis={pelisSeleccionadas}  visibilidad={visibilidad} />
 
     
     </React.Fragment>

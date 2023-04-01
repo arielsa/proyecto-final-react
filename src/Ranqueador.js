@@ -2,14 +2,17 @@ import React from "react";
 import { useState } from "react";
 import './Ranqueador.css'
 
-function Ranqueador (){
+function Ranqueador (props){
     
+    //props.ranking
     const estrellas = [0,1,2,3,4]
     const [estrellaActiva, setEstrellaActiva] = useState(null);
 
     function activar(index) {
         //console.log("click en estrella ", index);
+        props.setRanking(index);    
         setEstrellaActiva(index);
+        props.setStarIndex(index);
     }
 
     return (
@@ -24,7 +27,7 @@ function Ranqueador (){
                     key={index}
                     className={
                         "fa-sharp fa-solid fa-star stars " +
-                        (index <= estrellaActiva ? "active" : "")
+                        (index <= props.ranking ? "active" : "")
                     }
                     onClick={() => activar(index)}
                     ></i>

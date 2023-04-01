@@ -2,7 +2,9 @@ import React from "react";
 import './ApiList.css'
 
 function ApiList (props){
-    //console.log(props) 
+    //console.log(props)
+    //props.setPeliAGuardar () <= aca dentro va un objeto x.title x.url x.overview x.id
+
     const URL_IMAGE = "https://image.tmdb.org/t/p/original";
     
     return(
@@ -27,7 +29,10 @@ function ApiList (props){
                     </div>                    
                     <h4 className="text-center">{peli.title}</h4>
                     <h2><span onClick={ () => {
-                                  console.log('abrir modal desde peli sin detalle');
+                                    props.setRanking(0)
+                                    props.setFormAux(true);
+                                    peli.url=`${URL_IMAGE + peli.poster_path}`;
+                                    props.setPeliAGuardar (peli);
                                 } } > <i class="fas fa-window-restore icon "></i></span></h2>
                     </div>
                     
