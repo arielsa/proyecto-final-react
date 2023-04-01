@@ -25,7 +25,7 @@ function Peli (props){
                                     props.setRanking(0)
                                     props.setPeliAGuardar(props);
                                     props.setFormAux(true);                                  
-                                } }  > <i class="fas fa-window-restore icon "></i></span></h2>
+                                } }  > <i className="fas fa-window-restore icon "></i></span></h2>
                             </div>
                             {/* <Ranqueador/> */}
                             

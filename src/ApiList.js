@@ -20,20 +20,21 @@ function ApiList (props){
 
                     <div className=" poster-cont " >
                         <img
-                        src={`${URL_IMAGE + peli.poster_path}`}
+                        src={ props.renderApi ? `${URL_IMAGE + peli.poster_path}`: peli.url}
                         alt=""
                         height={400}
                         className=" "                        
                         />
 
                     </div>                    
-                    <h4 className="text-center">{peli.title}</h4>
-                    <h2><span onClick={ () => {
+                    <h4 className="text-center">
+                        <span onClick={ () => {
                                     props.setRanking(0)
                                     props.setFormAux(true);
                                     peli.url=`${URL_IMAGE + peli.poster_path}`;
                                     props.setPeliAGuardar (peli);
-                                } } > <i class="fas fa-window-restore icon "></i></span></h2>
+                                } } > <i className="fas fa-window-restore icon "></i></span>
+                    {peli.title}</h4>
                     </div>
                     
                 ))}

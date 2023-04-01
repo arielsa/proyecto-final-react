@@ -14,7 +14,7 @@ import { ApiList } from './ApiList.js';
 import { Ranqueador } from './Ranqueador.js';
 import {SeleccionDeCarga} from './SeleccionDeCarga.js'
 import { EstadoDeBusqueda } from './EstadoDeBusqueda.js';
-import { FormAux } from './FormAux';
+import { FormAux } from './FormAux.js';
 
 //const urlImage = 'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71niXI3lxlL._SY679_.jpg';
 //const urlImage2 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc4lZo5jSUNnXP7KX1S98SkLTjEP7E_3HByA&usqp=CAU';
@@ -52,10 +52,11 @@ function App() {
   const [pelisPopulares, setpelisPopulares] = useState([]);
 
   const fetchpelisPopulares = async () => {
-    const {data:{results},} = await axios.get(`${API_URL}/movie/popular`,
+    const {data:{results},} = await axios.get(`${API_URL}/movie/top_rated`,
     {params: {api_key: API_KEY, language:'es' },}
     )
-    setpelisPopulares(results);   
+    setpelisPopulares(results);
+    console.log(results);   
   }
 
 
@@ -107,6 +108,7 @@ function App() {
   // console.log(evento.target.value);
     //props.seleccionador(props.busqueda(evento.target.value));
     //props.seleccionador(props.busqueda)
+    setRenderApi(true);
     setValorBusqueda(evento.target.value);
     fetchpelisSearch();
     valorResultado.length > 1 ?  seleccionador(valorResultado) : setEstadoBusqueda ('No se encontro, vuelva a intentarlo');
@@ -153,9 +155,30 @@ function App() {
   const [formAux, setFormAux]=useState(false)///prender/apagar
   const [peliAGuardar, setPeliAGuardar] = useState([])
   const [ranking, setRanking] = useState ();
+  const [listAux,setListAux] = useState([]);
 
-  ///formAux === true? setRankig(0);
+  function CargarListAux (objeto){
+    listAux.push(objeto)
+  }
+////////////////////////////
+  const [renderApi,setRenderApi] = useState(true);
+  
+/////////////////////////filtrar introduccion de objeto en un array
 
+  function filtroDeIntroduccion(objetoBuscado,array){
+    
+    let objetoEncontrado = array.find(function(objeto) {
+      return objeto.id === objetoBuscado.id 
+    });
+
+    if (objetoEncontrado) {      
+      //console.log('Objeto encontrado');
+      return true
+    } else {
+      //console.log('Objeto no encontrado');
+      return false
+    }
+  }
 
 
 
@@ -164,26 +187,31 @@ function App() {
   return (
     <React.Fragment>
 
-      <div>
-      <Menu2  seleccionador={seleccionador}  populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
+    <div>{/*menu header */}
+      <Menu2 listAux={listAux} setRenderApi={setRenderApi} seleccionador={seleccionador}  populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
 
-    <SearchPelis seleccionador={seleccionador} onSearchValue={onSearchValue} pelisTrending={pelisTrending}/>
+    <SearchPelis setRenderApi={setRenderApi} seleccionador={seleccionador} onSearchValue={onSearchValue} pelisTrending={pelisTrending}/>
 
     <EstadoDeBusqueda estado={estadoBusqueda} />
     
     <SeleccionDeCarga SelecionarModoDeVista={SelecionarModoDeVista} />   
 
-      </div>
+    </div>
 
-    <FormAux setRanking={setRanking} ranking={ranking} formAux={formAux} setFormAux={setFormAux} peliAGuardar={peliAGuardar}  />
+    <FormAux filtroDeIntroduccion={filtroDeIntroduccion} listAux={listAux} CargarListAux={CargarListAux} setRanking={setRanking} ranking={ranking} formAux={formAux} setFormAux={setFormAux} peliAGuardar={peliAGuardar}  />
 
-    <PelisListDetalle visibilidad={visibilidad}> 
+    <div> {/*renderizado de API */}
+          <PelisListDetalle visibilidad={visibilidad}> 
       {pelisSeleccionadas.map (peli =>
-        (<Peli setFormAux={setFormAux} setRanking={setRanking}  setPeliAGuardar={setPeliAGuardar} key={peli.id} id={peli.id} title={peli.title} url={`${URL_IMAGE + peli.poster_path}`} overview={peli.overview}/>))
+        (<Peli setFormAux={setFormAux} setRanking={setRanking}  setPeliAGuardar={setPeliAGuardar} key={peli.id} id={peli.id} title={peli.title} url={ renderApi ? `${URL_IMAGE + peli.poster_path}`: peli.url } overview={peli.overview}/>))
       }
     </PelisListDetalle>
 
-    <ApiList setPeliAGuardar={setPeliAGuardar} setRanking={setRanking} setFormAux={setFormAux} pelis={pelisSeleccionadas}  visibilidad={visibilidad} />
+    <ApiList renderApi={renderApi} setPeliAGuardar={setPeliAGuardar} setRanking={setRanking} setFormAux={setFormAux} pelis={pelisSeleccionadas}  visibilidad={visibilidad} />
+    </div>
+
+    {/*rendreizador de objetos locales */}
+
 
     
     </React.Fragment>

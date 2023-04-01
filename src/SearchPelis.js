@@ -5,7 +5,8 @@ import './SearchPelis.css'
 
 function SearchPelis (props){
 
-    const trendingClickeado = ()=>{       
+    const trendingClickeado = ()=>{   
+        props.setRenderApi(true);    
         props.seleccionador(props.pelisTrending)
     }
 
