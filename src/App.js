@@ -2,6 +2,7 @@
 import {useState, useEffect} from 'react';
 import React from 'react';
 import axios from 'axios';
+import { ImputOutPutPrueba } from './ImputOutPutPrueba';
 
 ///////////importacion de componentes
 import './App.css';
@@ -15,6 +16,7 @@ import { Ranqueador } from './Ranqueador.js';
 import {SeleccionDeCarga} from './SeleccionDeCarga.js'
 import { EstadoDeBusqueda } from './EstadoDeBusqueda.js';
 import { FormAux } from './FormAux.js';
+
 
 //const urlImage = 'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71niXI3lxlL._SY679_.jpg';
 //const urlImage2 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc4lZo5jSUNnXP7KX1S98SkLTjEP7E_3HByA&usqp=CAU';
@@ -194,7 +196,9 @@ function App() {
 
     <EstadoDeBusqueda estado={estadoBusqueda} />
     
-    <SeleccionDeCarga SelecionarModoDeVista={SelecionarModoDeVista} />   
+    <SeleccionDeCarga SelecionarModoDeVista={SelecionarModoDeVista} />
+
+    <ImputOutPutPrueba></ImputOutPutPrueba>   
 
     </div>
 
