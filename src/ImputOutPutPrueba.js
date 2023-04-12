@@ -4,6 +4,7 @@ import React from 'react';
 
 function ImputOutPutPrueba() {
     const [inputValue, setInputValue] = useState('');
+    const[inFireBase, setInFireBase]=useState('');
   
     const handleFormSubmit = async (event) => {
       event.preventDefault();
@@ -24,13 +25,31 @@ function ImputOutPutPrueba() {
       setInputValue(event.target.value);
       console.log('Input actualizado:', event.target.value);
     };
+
+    const fetchFireBase = async ()=>{
+      try{
+        const snapshot = await db.collection('prueba').get();
+        let fetchedData = '';
+        snapshot.forEach((doc) => {
+          fetchedData += doc.data().message + '\n';
+        });
+        setInFireBase(fetchedData);
+        console.log(inFireBase);
+      }catch(error){console.error('Error al recuperar documentos:', error);}
+    } 
+
+   const soltar = ()=> {setInFireBase('')}
   
     return (
       <React.Fragment>
         <form onSubmit={handleFormSubmit}>
           <input type="text" value={inputValue} onChange={handleInputChange} />
           <button type="submit">Agregar</button>
-        </form>
+        </form> 
+          <button type="submit" onClick={fetchFireBase} >recuperar</button>
+          <button type="submit" onClick={soltar} >soltar</button>
+          <p>{inFireBase}</p>
+        
       </React.Fragment>
     );
   }
