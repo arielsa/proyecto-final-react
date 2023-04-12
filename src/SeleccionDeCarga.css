@@ -17,3 +17,40 @@
     color: var(--colorAlerta2);
 }
 
+span.modo-guardado{
+    margin-left: 15px;
+    text-decoration: none;
+    color: black;
+    cursor: auto;
+}
+
+span.vista{
+    margin-left: 5px;
+    text-decoration: none;
+    color: black;
+    cursor: auto;
+}
+
+input[type='radio'] {
+    display: none;
+}
+
+.opciones label{
+    cursor: pointer;
+    margin-left: 3px;
+    padding: 3px;
+}
+
+.opciones label:hover {
+    border-radius: 6px;
+    border: #00BFCA solid 2px ;
+    background-color:var(--colorSecundario);
+    color: var(--colorPredominante)
+}
+
+input[type='radio']:checked + label {
+    background-color: #454655;
+    border-radius:  6px;
+    border: #454655 solid 2px;
+    color: var(--colorAlerta2)
+}

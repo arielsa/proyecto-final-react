@@ -154,11 +154,17 @@ function App() {
 
   const visibilidad = modoDeLista;
   /////////////////////////////////////////creando en storage lista aux
-  const [formAux, setFormAux]=useState(false)///prender/apagar
+  const [formAux, setFormAux]=useState(false)///prender/apagar <<<<modal
   const [peliAGuardar, setPeliAGuardar] = useState([])
   const [ranking, setRanking] = useState ();
   const [listAux,setListAux] = useState([]);
+  const listVolverVer = [];
 
+  
+  function CargarListVolverVer (objeto){
+    listVolverVer.push(objeto)
+    console.log(listVolverVer);
+  }
   function CargarListAux (objeto){
     listAux.push(objeto)
   }
@@ -202,16 +208,27 @@ function App() {
 
     </div>
 
-    <FormAux renderApi={renderApi} filtroDeIntroduccion={filtroDeIntroduccion} listAux={listAux} CargarListAux={CargarListAux} setRanking={setRanking} ranking={ranking} formAux={formAux} setFormAux={setFormAux} peliAGuardar={peliAGuardar}  />
+    <FormAux 
+    listVolverVer={listVolverVer} CargarListVolverVer={CargarListVolverVer}
+    renderApi={renderApi} 
+    filtroDeIntroduccion={filtroDeIntroduccion} 
+    listAux={listAux} CargarListAux={CargarListAux} 
+    setRanking={setRanking} ranking={ranking} formAux={formAux} 
+    setFormAux={setFormAux} peliAGuardar={peliAGuardar}  />
 
-    <div> {/*renderizado de API */}
+    <div> {/*renderizado de pelis */}
           <PelisListDetalle visibilidad={visibilidad}> 
       {pelisSeleccionadas.map (peli =>
         (<Peli setFormAux={setFormAux} setRanking={setRanking}  setPeliAGuardar={setPeliAGuardar} key={peli.id} id={peli.id} title={peli.title} url={ renderApi ? `${URL_IMAGE + peli.poster_path}`: peli.url } overview={peli.overview}/>))
       }
     </PelisListDetalle>
 
-    <ApiList renderApi={renderApi} setPeliAGuardar={setPeliAGuardar} setRanking={setRanking} setFormAux={setFormAux} pelis={pelisSeleccionadas}  visibilidad={visibilidad} />
+    <ApiList renderApi={renderApi} 
+    setPeliAGuardar={setPeliAGuardar} 
+    setRanking={setRanking} 
+    setFormAux={setFormAux} 
+    pelis={pelisSeleccionadas}  
+    visibilidad={visibilidad} />
     </div>
 
     {/*rendreizador de objetos locales */}

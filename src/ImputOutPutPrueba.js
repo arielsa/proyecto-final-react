@@ -34,8 +34,9 @@ function ImputOutPutPrueba() {
           fetchedData += doc.data().message + '\n';
         });
         setInFireBase(fetchedData);
-        console.log(inFireBase);
+        
       }catch(error){console.error('Error al recuperar documentos:', error);}
+      console.log(inFireBase);
     } 
 
    const soltar = ()=> {setInFireBase('')}

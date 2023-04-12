@@ -37,3 +37,11 @@
 i.active{
     color: var(--colorAlerta);
 }
+
+.rankeador-box.guardar-ranking{
+    cursor: pointer;    
+}
+.rankeador-box.guardar-ranking:hover{
+    color: #4EEDFD;
+    background-color: var(--colorAcentoDark);    
+}

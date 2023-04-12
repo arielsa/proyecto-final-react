@@ -4,15 +4,15 @@ import './Ranqueador.css'
 
 function Ranqueador (props){
     
-    //props.ranking
+    //props.ranking props.guardarSeleccionVolverVer
     const estrellas = [0,1,2,3,4]
     const [estrellaActiva, setEstrellaActiva] = useState(null);
 
     function activar(index) {
         //console.log("click en estrella ", index);
-        props.setRanking(index);    
-        setEstrellaActiva(index);
-        props.setStarIndex(index);
+        props.setRanking(index); // el estado del ranking en app   
+        setEstrellaActiva(index);// estrella activa es solo para el css
+        
     }
 
     return (
@@ -32,10 +32,9 @@ function Ranqueador (props){
                     onClick={() => activar(index)}
                     ></i>
                 ))}
-
-                </div>
-                        
+                </div>                        
             </div>
+            <div className="rankeador-box guardar-ranking" onClick={props.guardarSeleccionVolverVer} >guardar</div>
         </div>
         
 {/* 
