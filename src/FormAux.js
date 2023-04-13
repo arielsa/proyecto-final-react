@@ -11,7 +11,7 @@ function FormAux(props){
     let id = props.peliAGuardar.id;
     let url= props.peliAGuardar.url
     ////////////////////////////
-    console.log(url);
+    //console.log(url);
     let overview=props.peliAGuardar.overview;
 
     const peliMarcada={
@@ -25,11 +25,10 @@ function FormAux(props){
     const[visto,setVisto]=useState(false)
 
     const cerrarModal= ()=>{
-        setVisto(false)
-        props.setFormAux(false)
         setMensajePeliRepetida('')
+        setVisto(false)
+        props.setFormAux(false)        
     }
-
 
     const seleccionProxima = () => {
         let permitirCarga;       
@@ -43,7 +42,7 @@ function FormAux(props){
                 props.setFormAux(false) 
             } else{
                 setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                console.log('no puede ingresar objeto al array');
+                //console.log('no puede ingresar objeto al array');
             }
         }else {
             props.CargarListAux(peliMarcada)
@@ -56,8 +55,6 @@ function FormAux(props){
         /////////////////////////listVolverVer o listVisto
         const [listRankeadaGuardar, setListRankeadaGuardar] = React.useState('')
 
-
-
     const seleccionVolverVer = () =>{
         setListRankeadaGuardar('volverVer')
         let permitirCarga;
@@ -68,7 +65,7 @@ function FormAux(props){
                 setVisto(true)                               
             } else{
                 setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                console.log('no puede ingresar objeto al array');
+                //console.log('no puede ingresar objeto al array');
             }
         }
         else{
@@ -94,7 +91,7 @@ function FormAux(props){
                 setVisto(true)                               
             } else{
                 setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                console.log('no puede ingresar objeto al array');
+                //console.log('no puede ingresar objeto al array');
             }
         }
         else{
@@ -105,9 +102,9 @@ function FormAux(props){
     const guardarSeleccionVisto= ()=>{ // se guarda con el boton guardar del rankeador
         props.CargarListVisto(peliMarcada)        
         //console.log(props.ranking + 'ranking' );
-        //console.log(peliMarcada);
-        props.setFormAux(false)
-        setVisto(false) //cierro el rankeador       
+        //console.log(peliMarcada);        
+        setVisto(false) //cierro el rankeador
+        props.setFormAux(false)       
     }
 
     const eliminar = ()=>{
@@ -119,9 +116,7 @@ function FormAux(props){
         props.pelisSeleccionadas.splice(indiceObjetoBorrar,1);
         props.setFormAux(false)       
     }
-
-    //props.pelisSeleccionadas es el array actual
-
+    
     return(
         <React.Fragment>
 
@@ -156,11 +151,11 @@ function FormAux(props){
                     <h2 className='modal-opciones-inferiores' >
                         <span  className='opcion-modal' onClick={  cerrarModal } > 
                             <i  id='cerrar' className="fas fa-window-restore  "></i>
-                            <label for='cerrar'  className='modal-label' >Cerrar</label>
+                            <label htmlFor='cerrar'  className='modal-label' >Cerrar</label>
                         </span>
                         <span onClick={eliminar} className= {props.btnEliminarListaPropia ? 'opcion-modal icon2' : 'opcion-modal icon2 inactive' }  >                            
                             <i id='eliminar'  className="fa-solid fa-circle-xmark  "></i>
-                            <label for='eliminar'  className='modal-label '  >Eliminar</label>                            
+                            <label htmlFor='eliminar'  className='modal-label '  >Eliminar</label>                            
                         </span>
                     </h2>
                     </div>

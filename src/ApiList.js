@@ -29,10 +29,10 @@ function ApiList (props){
 
                     </div>                    
                     <h4 className="text-center">
-                        <span onClick={ () => {console.log('1');
+                        <span onClick={ () => {//console.log('1');
                                     props.setRanking(0)
                                     props.setFormAux(true);
-                                    console.log(peli.url);
+                                    //console.log(peli.url);
                                     
                                     if(props.renderApi) { peli.url=`${URL_IMAGE + peli.poster_path}`}///////// 
                                     props.setPeliAGuardar (peli);

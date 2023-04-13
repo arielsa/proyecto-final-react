@@ -33,7 +33,7 @@ function Menu2 (props){
     function seleccionVolverVer () { 
         props.setRenderApi(false);
         props.seleccionador(props.listVolverVer);
-        console.log(props.listVolverVer);
+        //console.log(props.listVolverVer);
         props.setRankeado(true);
         props.setBtnEliminarListaPropia(true)
         
@@ -42,7 +42,7 @@ function Menu2 (props){
     function seleccionVisto () { 
         props.setRenderApi(false);// si
         props.seleccionador(props.listVisto);// cambiar
-        console.log(props.listVisto);// camibar
+        //console.log(props.listVisto);// camibar
         props.setRankeado(true);// si
         props.setBtnEliminarListaPropia(true)//si
         

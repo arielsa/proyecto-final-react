@@ -58,7 +58,7 @@ function App() {
     {params: {api_key: API_KEY, language:'es' },}
     )
     setpelisPopulares(results);
-    console.log(results);   
+    //console.log(results);   
   }
 
 

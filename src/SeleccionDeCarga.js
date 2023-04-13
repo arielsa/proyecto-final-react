@@ -17,7 +17,7 @@ function SeleccionDeCarga (props){
     function porDefecto(){
         
         if (persistencia === '0'){
-            valorDefecto = 'true'
+            valorDefecto = true
         }
         
     }
@@ -32,11 +32,11 @@ function SeleccionDeCarga (props){
                 <span className="m-1 icono-seleccionador" onClick={listarSinDetalle} ><i className="fas fa-th-large"></i></span>
                 <span className="modo-guardado"  >modo de guardado:</span>
                 <input type="radio" name="modo-guardado" value='1' id="app" checked={valorDefecto} onChange={e=>setPersistencia(e.target.value)} />
-                <label for='app' >APP</label>
+                <label htmlFor='app' >APP</label>
                 <input type="radio" name="modo-guardado" value='2' id="local" onChange={e=>setPersistencia(e.target.value)} />
-                <label for='local' >LocalStorage</label>
+                <label htmlFor='local' >LocalStorage</label>
                 <input type="radio" name="modo-guardado" value='3' id="fire" onChange={e=>setPersistencia(e.target.value)} />
-                <label for='fire' >FireBase</label>
+                <label htmlFor='fire' >FireBase</label>
             </h6>
             <h6>
             

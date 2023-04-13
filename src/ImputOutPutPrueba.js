@@ -8,13 +8,13 @@ function ImputOutPutPrueba() {
   
     const handleFormSubmit = async (event) => {
       event.preventDefault();
-      console.log('Agregando mensaje:', inputValue);
+      //console.log('Agregando mensaje:', inputValue);
       try {
         const docRef = await db.collection('prueba').add({
           message: inputValue,
           timestamp: new Date(),
         });
-        console.log('Nuevo documento creado con ID:', docRef.id);
+        //console.log('Nuevo documento creado con ID:', docRef.id);
         setInputValue('');
       } catch (error) {
         console.error('Error al agregar documento:', error);
@@ -23,7 +23,7 @@ function ImputOutPutPrueba() {
   
     const handleInputChange = (event) => {
       setInputValue(event.target.value);
-      console.log('Input actualizado:', event.target.value);
+      //console.log('Input actualizado:', event.target.value);
     };
 
     const fetchFireBase = async ()=>{
@@ -36,7 +36,7 @@ function ImputOutPutPrueba() {
         setInFireBase(fetchedData);
         
       }catch(error){console.error('Error al recuperar documentos:', error);}
-      console.log(inFireBase);
+      //console.log(inFireBase);
     } 
 
    const soltar = ()=> {setInFireBase('')}
