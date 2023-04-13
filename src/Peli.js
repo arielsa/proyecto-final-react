@@ -15,7 +15,7 @@ function Peli (props){
     const estrellas = []
     for (let index = 0; index < props.ranking+1; index++) {
         estrellas.push (index);        
-    }
+    }//props.rankeado
 
 
 
@@ -32,7 +32,8 @@ function Peli (props){
                         </div>
                         <div className="col-md-6 ">
                             <h2 className="text-center">{props.title  }</h2>
-                            <div className="stars  text-center ">
+                            
+                            <div className={props.rankeado? "stars  text-center " : 'stars  text-center inactive'}>
                                 {estrellas.map((estrella, index) => (
                                     <i
                                     key={index}
@@ -41,8 +42,10 @@ function Peli (props){
                                     }                                    
                                     ></i>
                                 ))}
-                            </div>     
-                            <p className="text-center" >{props.overview}</p>            
+                            </div> 
+
+                            <p className="text-center" >{props.overview}</p>
+
                             <div>
                                 <h2><span onClick={ () => {
                                     props.setRanking(0)

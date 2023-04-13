@@ -41,3 +41,22 @@
   background-color: var(--colorAcentoDark);
   border-radius: 5px;
 }
+
+.opcion-modal{
+  margin: 5px;
+  margin-top: 15px;
+}
+
+.modal-label{
+  cursor: pointer;
+  font-size: 80%;
+  margin: 3px;
+}
+
+.modal-opciones-inferiores{
+  margin-top: 5px;
+}
+
+.icon2:hover{
+  color: rgb(205, 5, 5);
+}

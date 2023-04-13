@@ -147,12 +147,14 @@ function App() {
 
   ////////////////seleccionador de modo de visualizacion
   const [modoDeLista, setModoDeListado]= useState('sin-detalle')
+  const [rankeado, setRankeado] = useState('false')
+  const [btnEliminarListaPropia, setBtnEliminarListaPropia] = useState('false')
 
   function SelecionarModoDeVista (modo){
             setModoDeListado(modo)
   }
 
-  const visibilidad = modoDeLista;
+  let visibilidad = modoDeLista;
   /////////////////////////////////////////creando en storage lista aux
   const [formAux, setFormAux]=useState(false)///prender/apagar <<<<modal
   const [peliAGuardar, setPeliAGuardar] = useState([])
@@ -187,10 +189,6 @@ function App() {
       return false
     }
   }
-
-
-
-
 ////////////////////////////////////////////////////////return
   return (
     <React.Fragment>
@@ -198,9 +196,12 @@ function App() {
     <div>{/*menu header */}
       <Menu2 listAux={listAux} listVolverVer={listVolverVer} 
       setRenderApi={setRenderApi} seleccionador={seleccionador}  
-      populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
+      populares={pelisPopulares}  enCartelera={pelisNowPaying}      
+      setRankeado={setRankeado} setBtnEliminarListaPropia={setBtnEliminarListaPropia} />
 
-    <SearchPelis setRenderApi={setRenderApi} seleccionador={seleccionador} onSearchValue={onSearchValue} pelisTrending={pelisTrending}/>
+    <SearchPelis setRenderApi={setRenderApi} setBtnEliminarListaPropia = {setBtnEliminarListaPropia}
+    seleccionador={seleccionador} onSearchValue={onSearchValue} 
+    pelisTrending={pelisTrending}/>
 
     <EstadoDeBusqueda estado={estadoBusqueda} />
     
@@ -212,8 +213,8 @@ function App() {
 
     <FormAux 
     listVolverVer={listVolverVer} CargarListVolverVer={CargarListVolverVer}
-    renderApi={renderApi} 
-    filtroDeIntroduccion={filtroDeIntroduccion} 
+    renderApi={renderApi} pelisSeleccionadas={pelisSeleccionadas}
+    filtroDeIntroduccion={filtroDeIntroduccion} btnEliminarListaPropia={btnEliminarListaPropia}
     listAux={listAux} CargarListAux={CargarListAux} 
     setRanking={setRanking} ranking={ranking} formAux={formAux} 
     setFormAux={setFormAux} peliAGuardar={peliAGuardar}  />
@@ -223,7 +224,7 @@ function App() {
       <PelisListDetalle visibilidad={visibilidad}> 
         {pelisSeleccionadas.map (peli =>
           (<Peli setFormAux={setFormAux} setRanking={setRanking}  
-            setPeliAGuardar={setPeliAGuardar} key={peli.id} 
+            setPeliAGuardar={setPeliAGuardar} key={peli.id} rankeado={rankeado}
             id={peli.id} title={peli.title} ranking = {peli.ranking}
             url={ renderApi ? `${URL_IMAGE + peli.poster_path}`: peli.url } 
             overview={peli.overview}/>))

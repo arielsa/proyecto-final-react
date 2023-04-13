@@ -43,13 +43,16 @@ function ImputOutPutPrueba() {
   
     return (
       <React.Fragment>
-        <form onSubmit={handleFormSubmit}>
-          <input type="text" value={inputValue} onChange={handleInputChange} />
-          <button type="submit">Agregar</button>
-        </form> 
-          <button type="submit" onClick={fetchFireBase} >recuperar</button>
-          <button type="submit" onClick={soltar} >soltar</button>
-          <p>{inFireBase}</p>
+        <div className='inactive'>
+          <form onSubmit={handleFormSubmit}>
+            <input type="text" value={inputValue} onChange={handleInputChange} />
+            <button type="submit">Agregar</button>
+          </form> 
+            <button type="submit" onClick={fetchFireBase} >recuperar</button>
+            <button type="submit" onClick={soltar} >soltar</button>
+            <p>{inFireBase}</p>
+        </div>
+
         
       </React.Fragment>
     );

@@ -8,6 +8,7 @@ function SearchPelis (props){
     const trendingClickeado = ()=>{   
         props.setRenderApi(true);    
         props.seleccionador(props.pelisTrending)
+        props.setBtnEliminarListaPropia(false)
     }
 
   

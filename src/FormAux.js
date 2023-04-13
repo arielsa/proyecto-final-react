@@ -75,14 +75,23 @@ function FormAux(props){
 
     const guardarSeleccionVolverVer= ()=>{ // se guarda con el boton guardar del rankeador
         props.CargarListVolverVer(peliMarcada)        
-        console.log(props.ranking + 'ranking' );
-        console.log(peliMarcada);
+        //console.log(props.ranking + 'ranking' );
+        //console.log(peliMarcada);
         props.setFormAux(false)
-        setVisto(false)        
+        setVisto(false) //cierro el rankeador       
     }
 
+    const eliminar = ()=>{
 
+        let indiceObjetoBorrar = props.pelisSeleccionadas.findIndex(function(objeto) {
+            return objeto.id === peliMarcada.id 
+        });
+        //console.log(indiceObjetoBorrar);
+        props.pelisSeleccionadas.splice(indiceObjetoBorrar,1);
+        props.setFormAux(false)       
+    }
 
+    //props.pelisSeleccionadas es el array actual
 
     return(
         <React.Fragment>
@@ -113,7 +122,16 @@ function FormAux(props){
                         guardarSeleccionVolverVer={guardarSeleccionVolverVer}
                         ranking={props.ranking} setRanking={props.setRanking}/>
                     </div>
-                    <h2><span onClick={  cerrarModal } > <i className="fas fa-window-restore icon "></i></span></h2>
+                    <h2 className='modal-opciones-inferiores' >
+                        <span  className='opcion-modal' onClick={  cerrarModal } > 
+                            <i  id='cerrar' className="fas fa-window-restore  "></i>
+                            <label for='cerrar'  className='modal-label' >Cerrar</label>
+                        </span>
+                        <span onClick={eliminar} className= {props.btnEliminarListaPropia ? 'opcion-modal icon2' : 'opcion-modal icon2 inactive' }  >                            
+                            <i id='eliminar'  className="fa-solid fa-circle-xmark  "></i>
+                             <label for='eliminar'  className='modal-label '  >Eliminar</label>                            
+                        </span>
+                    </h2>
                     </div>
                     
                 </div>
