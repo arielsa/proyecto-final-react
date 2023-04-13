@@ -26,13 +26,19 @@ function Menu2 (props){
         props.seleccionador(props.listAux);
     }
 
+    function seleccionVolverVer () { 
+        props.setRenderApi(false);
+        props.seleccionador(props.listVolverVer);
+        console.log(props.listVolverVer);
+    }
+
 
     return(
         <div className="row">
             <div className="col-12 d-flex align-items-center m-2 ">
                 <h1> <i className="fas fa-film log"></i></h1><h1 className="log2" > PeList</h1>
                 <span className="mx-3 selec ">vistas</span>
-                <span className="mx-3 selec ">volver a ver</span>
+                <span onClick={seleccionVolverVer} className="mx-3 selec ">volver a ver</span>
                 <span onClick={seleccionProximaVer} className="mx-3 selec "> proxima a ver</span>
                 
                 <span onClick={selecionPopulares} className="mx-3 selec "><i className="fas fa-search-plus"></i> populares</span>

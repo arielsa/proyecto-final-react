@@ -57,27 +57,28 @@ function FormAux(props){
     }
 
     const seleccionVolverVer = () =>{
-        setVisto(true)// abrir el ranqueador     
-    }
-
-    const guardarSeleccionVolverVer= ()=>{ // se guarda con el boton guardar del rankeador
         let permitirCarga;
         if(props.listVolverVer.length>0)
         {
             props.filtroDeIntroduccion(peliMarcada,props.listVolverVer) ? permitirCarga= false : permitirCarga = true ;
             if (permitirCarga){
-                props.CargarListVolverVer(peliMarcada)                               
+                setVisto(true)                               
             } else{
                 setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                 console.log('no puede ingresar objeto al array');
             }
         }
         else{
-            props.CargarListVolverVer(peliMarcada)            
-        }        
+            setVisto(true)            
+        }     
+    }
+
+    const guardarSeleccionVolverVer= ()=>{ // se guarda con el boton guardar del rankeador
+        props.CargarListVolverVer(peliMarcada)        
         console.log(props.ranking + 'ranking' );
         console.log(peliMarcada);
         props.setFormAux(false)
+        setVisto(false)        
     }
 
 

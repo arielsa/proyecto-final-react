@@ -5,7 +5,20 @@ import {Ranqueador} from './Ranqueador.js'
 const urlImage = 'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71niXI3lxlL._SY679_.jpg';
 
 function Peli (props){
-               
+
+    let puntitos= ''
+
+    for (let index = 0; index < 4; index++) {
+        puntitos =puntitos+ '0'
+        
+    }
+    const estrellas = []
+    for (let index = 0; index < props.ranking+1; index++) {
+        estrellas.push (index);        
+    }
+
+
+
     return(    
     <React.Fragment>
 
@@ -18,14 +31,24 @@ function Peli (props){
                             <img className="poster" src={props.url}/>{/*  URLImage+"/"props.poster_path  */ }
                         </div>
                         <div className="col-md-6 ">
-                            <h2 className="text-center">{props.title}</h2>
+                            <h2 className="text-center">{props.title  }</h2>
+                            <div className="stars  text-center ">
+                                {estrellas.map((estrella, index) => (
+                                    <i
+                                    key={index}
+                                    className={
+                                        "fa-sharp fa-solid fa-star stars active tamaño"                            
+                                    }                                    
+                                    ></i>
+                                ))}
+                            </div>     
                             <p className="text-center" >{props.overview}</p>            
                             <div>
                                 <h2><span onClick={ () => {
                                     props.setRanking(0)
                                     props.setPeliAGuardar(props);
                                     props.setFormAux(true);                                  
-                                } }  > <i className="fas fa-window-restore icon "></i></span></h2>
+                                } }  > <i className="fas fa-window-restore icon  "></i></span></h2>
                             </div>
                             {/* <Ranqueador/> */}
                             

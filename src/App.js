@@ -158,7 +158,7 @@ function App() {
   const [peliAGuardar, setPeliAGuardar] = useState([])
   const [ranking, setRanking] = useState ();
   const [listAux,setListAux] = useState([]);
-  const listVolverVer = [];
+  const [listVolverVer, set] = useState([]);
 
   
   function CargarListVolverVer (objeto){
@@ -196,7 +196,9 @@ function App() {
     <React.Fragment>
 
     <div>{/*menu header */}
-      <Menu2 listAux={listAux} setRenderApi={setRenderApi} seleccionador={seleccionador}  populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
+      <Menu2 listAux={listAux} listVolverVer={listVolverVer} 
+      setRenderApi={setRenderApi} seleccionador={seleccionador}  
+      populares={pelisPopulares}  enCartelera={pelisNowPaying}/>
 
     <SearchPelis setRenderApi={setRenderApi} seleccionador={seleccionador} onSearchValue={onSearchValue} pelisTrending={pelisTrending}/>
 
@@ -216,12 +218,17 @@ function App() {
     setRanking={setRanking} ranking={ranking} formAux={formAux} 
     setFormAux={setFormAux} peliAGuardar={peliAGuardar}  />
 
-    <div> {/*renderizado de pelis */}
-          <PelisListDetalle visibilidad={visibilidad}> 
-      {pelisSeleccionadas.map (peli =>
-        (<Peli setFormAux={setFormAux} setRanking={setRanking}  setPeliAGuardar={setPeliAGuardar} key={peli.id} id={peli.id} title={peli.title} url={ renderApi ? `${URL_IMAGE + peli.poster_path}`: peli.url } overview={peli.overview}/>))
-      }
-    </PelisListDetalle>
+    <div> 
+      {/*renderizado de pelis */}
+      <PelisListDetalle visibilidad={visibilidad}> 
+        {pelisSeleccionadas.map (peli =>
+          (<Peli setFormAux={setFormAux} setRanking={setRanking}  
+            setPeliAGuardar={setPeliAGuardar} key={peli.id} 
+            id={peli.id} title={peli.title} ranking = {peli.ranking}
+            url={ renderApi ? `${URL_IMAGE + peli.poster_path}`: peli.url } 
+            overview={peli.overview}/>))
+        }
+      </PelisListDetalle>
 
     <ApiList renderApi={renderApi} 
     setPeliAGuardar={setPeliAGuardar} 

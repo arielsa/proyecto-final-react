@@ -32,3 +32,9 @@ img.poster{
     color: #00BFCA;
     
 }
+
+.stars.tamaño{
+    color: var(--coloreSubdominate);
+    font-size: 150%;
+    cursor: auto;
+}

@@ -21,17 +21,17 @@ function Ranqueador (props){
         <span className="material-symbols-outlined">done</span> */}        
         <div className="rank">
             <div className="rankeador-box">
-                <div className="stars">
-                {estrellas.map((estrella, index) => (
-                    <i
-                    key={index}
-                    className={
-                        "fa-sharp fa-solid fa-star stars " +
-                        (index <= props.ranking ? "active" : "")
-                    }
-                    onClick={() => activar(index)}
-                    ></i>
-                ))}
+                <div className="stars selec">
+                    {estrellas.map((estrella, index) => (
+                        <i
+                        key={index}
+                        className={
+                            "fa-sharp fa-solid fa-star stars " +
+                            (index <= props.ranking ? "active" : "")
+                        }
+                        onClick={() => activar(index)}
+                        ></i>
+                    ))}
                 </div>                        
             </div>
             <div className="rankeador-box guardar-ranking" onClick={props.guardarSeleccionVolverVer} >guardar</div>
