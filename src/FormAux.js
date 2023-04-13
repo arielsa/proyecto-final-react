@@ -29,10 +29,7 @@ function FormAux(props){
         props.setFormAux(false)
         setMensajePeliRepetida('')
     }
-    const seleccionVisto = () =>{
-        setVisto(true)
-        setMensajePeliRepetida('')
-    }
+
 
     const seleccionProxima = () => {
         let permitirCarga;       
@@ -56,7 +53,13 @@ function FormAux(props){
         //console.log(peliMarcada.url);
     }
 
+        /////////////////////////listVolverVer o listVisto
+        const [listRankeadaGuardar, setListRankeadaGuardar] = React.useState('')
+
+
+
     const seleccionVolverVer = () =>{
+        setListRankeadaGuardar('volverVer')
         let permitirCarga;
         if(props.listVolverVer.length>0)
         {
@@ -75,6 +78,32 @@ function FormAux(props){
 
     const guardarSeleccionVolverVer= ()=>{ // se guarda con el boton guardar del rankeador
         props.CargarListVolverVer(peliMarcada)        
+        //console.log(props.ranking + 'ranking' );
+        //console.log(peliMarcada);
+        props.setFormAux(false)
+        setVisto(false) //cierro el rankeador       
+    }
+
+    const seleccionVisto = () =>{
+        setListRankeadaGuardar('visto')
+        let permitirCarga;
+        if(props.listVisto.length>0)
+        {
+            props.filtroDeIntroduccion(peliMarcada,props.listVisto) ? permitirCarga= false : permitirCarga = true ;
+            if (permitirCarga){
+                setVisto(true)                               
+            } else{
+                setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
+                console.log('no puede ingresar objeto al array');
+            }
+        }
+        else{
+            setVisto(true)            
+        }     
+    }
+
+    const guardarSeleccionVisto= ()=>{ // se guarda con el boton guardar del rankeador
+        props.CargarListVisto(peliMarcada)        
         //console.log(props.ranking + 'ranking' );
         //console.log(peliMarcada);
         props.setFormAux(false)
@@ -119,6 +148,8 @@ function FormAux(props){
                     <div className={ visto? '':'inactive'}  >
                         <h4>Ranqueador:</h4>
                         <Ranqueador 
+                        listRankeadaGuardar={listRankeadaGuardar}
+                        guardarSeleccionVisto={guardarSeleccionVisto}
                         guardarSeleccionVolverVer={guardarSeleccionVolverVer}
                         ranking={props.ranking} setRanking={props.setRanking}/>
                     </div>
@@ -129,7 +160,7 @@ function FormAux(props){
                         </span>
                         <span onClick={eliminar} className= {props.btnEliminarListaPropia ? 'opcion-modal icon2' : 'opcion-modal icon2 inactive' }  >                            
                             <i id='eliminar'  className="fa-solid fa-circle-xmark  "></i>
-                             <label for='eliminar'  className='modal-label '  >Eliminar</label>                            
+                            <label for='eliminar'  className='modal-label '  >Eliminar</label>                            
                         </span>
                     </h2>
                     </div>

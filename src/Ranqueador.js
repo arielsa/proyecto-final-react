@@ -15,6 +15,7 @@ function Ranqueador (props){
         
     }
 
+
     return (
     <div>
         {/* <span className="material-symbols-outlined">favorite</span>
@@ -34,7 +35,11 @@ function Ranqueador (props){
                     ))}
                 </div>                        
             </div>
-            <div className="rankeador-box guardar-ranking" onClick={props.guardarSeleccionVolverVer} >guardar</div>
+            <div className="rankeador-box guardar-ranking" 
+            onClick=
+            {
+                props.listRankeadaGuardar=='volverVer' ? props.guardarSeleccionVolverVer : props.guardarSeleccionVisto 
+                } >guardar</div>
         </div>
         
 {/* 

@@ -39,12 +39,21 @@ function Menu2 (props){
         
     }
 
+    function seleccionVisto () { 
+        props.setRenderApi(false);// si
+        props.seleccionador(props.listVisto);// cambiar
+        console.log(props.listVisto);// camibar
+        props.setRankeado(true);// si
+        props.setBtnEliminarListaPropia(true)//si
+        
+    }
+
 
     return(
         <div className="row">
             <div className="col-12 d-flex align-items-center m-2 ">
                 <h1> <i className="fas fa-film log"></i></h1><h1 className="log2" > PeList</h1>
-                <span className="mx-3 selec ">vistas</span>
+                <span  onClick={seleccionVisto} className="mx-3 selec ">vistas</span>
                 <span onClick={seleccionVolverVer} className="mx-3 selec text-center ">volver a ver</span>
                 <span onClick={seleccionProximaVer} className="mx-3 selec text-center "> proxima a ver</span>
                 

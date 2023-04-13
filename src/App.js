@@ -159,13 +159,17 @@ function App() {
   const [formAux, setFormAux]=useState(false)///prender/apagar <<<<modal
   const [peliAGuardar, setPeliAGuardar] = useState([])
   const [ranking, setRanking] = useState ();
-  const [listAux,setListAux] = useState([]);
-  const [listVolverVer, set] = useState([]);
+  const [listAux,setListAux] = useState([]);////lista volver a ver
+  const [listVolverVer, setVolverVer] = useState([]);
+  const [listVisto, setVisto] = useState([]);
 
-  
+
+
+    function CargarListVisto (objeto){
+    listVisto.push(objeto)    
+  }
   function CargarListVolverVer (objeto){
-    listVolverVer.push(objeto)
-    console.log(listVolverVer);
+    listVolverVer.push(objeto)    
   }
   function CargarListAux (objeto){
     listAux.push(objeto)
@@ -194,7 +198,8 @@ function App() {
     <React.Fragment>
 
     <div>{/*menu header */}
-      <Menu2 listAux={listAux} listVolverVer={listVolverVer} 
+      <Menu2 listAux={listAux} listVolverVer={listVolverVer}
+      listVisto={listVisto} 
       setRenderApi={setRenderApi} seleccionador={seleccionador}  
       populares={pelisPopulares}  enCartelera={pelisNowPaying}      
       setRankeado={setRankeado} setBtnEliminarListaPropia={setBtnEliminarListaPropia} />
@@ -213,6 +218,7 @@ function App() {
 
     <FormAux 
     listVolverVer={listVolverVer} CargarListVolverVer={CargarListVolverVer}
+    listVisto={listVisto} CargarListVisto={CargarListVisto}
     renderApi={renderApi} pelisSeleccionadas={pelisSeleccionadas}
     filtroDeIntroduccion={filtroDeIntroduccion} btnEliminarListaPropia={btnEliminarListaPropia}
     listAux={listAux} CargarListAux={CargarListAux} 
