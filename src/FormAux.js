@@ -247,7 +247,7 @@ function FormAux(props){
                     <div className='poster-cont '>
                         <h4 className='align-text-center'>Guardar en lista : {title}</h4>
                         <div>
-                            <span onClick={seleccionVisto} >vista |</span>
+                            <span onClick={seleccionVisto} >visto |</span>
                             <span onClick={seleccionVolverVer} > volver a ver |</span>
                             <span onClick={seleccionProxima } > proxima a ver</span>
                             <div className='poster-cont'>
