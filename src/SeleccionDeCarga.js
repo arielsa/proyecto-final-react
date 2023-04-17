@@ -54,22 +54,6 @@ function SeleccionDeCarga (props){
     }
 
 
-
-    function activacionDePersistencia (){// list aux cambia al salir de la funcion
-        //console.log(props.persistencia);
-        switch (props.persistencia) {
-            case '2':
-                props.setListAux(props.listaEnStoragePAV);
-                props.seleccionador(props.listAux);
-                //console.log(' lista2:  ' + props.listAux);
-                
-                break;
-        
-            default:
-                break;
-        }
-    }
-
     
 
     return(

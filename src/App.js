@@ -18,33 +18,9 @@ import { EstadoDeBusqueda } from './EstadoDeBusqueda.js';
 import { FormAux } from './FormAux.js';
 
 
-//const urlImage = 'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71niXI3lxlL._SY679_.jpg';
-//const urlImage2 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc4lZo5jSUNnXP7KX1S98SkLTjEP7E_3HByA&usqp=CAU';
-
-// const pelisPopulares = [
-//   {id:1, title:'peli 1' , url:urlImage, overview:'esta pelis bla bla bla', rank:null},
-//   {id:2, title:'peli 2 ', url:urlImage, overview:'esta pelis bla bla bla', rank:null },
-//   {id:3, title:'peli 3' , url:urlImage, overview:'esta pelis bla bla bla', rank:null},
-//   {id:4, title:'peli 4' , url:urlImage, overview:'esta pelis bla bla bla', rank:null},
-//   {id:5, title:'peli 5' , url:urlImage, overview:'esta pelis bla bla bla', rank:null},
-// ]
-
-//const pelisLanzamientos = [
-//  {id:1, title:'peli 1' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
-//  {id:2, title:'peli 2 ', url:urlImage2, overview:'esta pelis bla bla bla', rank:null },
-//  {id:3, title:'peli 3' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
-//  {id:4, title:'peli 4' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
-//  {id:5, title:'peli 5' , url:urlImage2, overview:'esta pelis bla bla bla', rank:null},
-//]
-//prueba de consumo de API:
-
 const API_URL = "https://api.themoviedb.org/3";
 const API_KEY = "c495d91754fd32409ac24c38c41473ca";
 const URL_IMAGE = "https://image.tmdb.org/t/p/original";
-
-
-
-
 
 
 function App() {
@@ -57,12 +33,8 @@ function App() {
     const {data:{results},} = await axios.get(`${API_URL}/movie/top_rated`,
     {params: {api_key: API_KEY, language:'es' },}
     )
-    setpelisPopulares(results);
-    //console.log(results);   
+    setpelisPopulares(results);      
   }
-
-
-
   // en cartelera:
 
   const [pelisNowPaying, setpelisNowPaying] = useState([]);
@@ -81,41 +53,19 @@ function App() {
     const {data:{results},} = await axios.get(`${API_URL}/trending/movie/day`,
     {params: {api_key: API_KEY, language:'es' },}
     )
-    setpelisTrending(results);
-    
-    
-       
+    setpelisTrending(results);       
   }
-
-
-
-  /////////////////////////////busqueda y captura:
-
-  // const [busqueda, setBusqueda]=useState([])
-  // const [busquedaAux, setBusquedaAux] = useState('a')
-
-  // let valor='fatal'
-  // async function fetchpelisBuscadas () {
-    
-  //   const {data:{results},} = await axios.get(`${API_URL}/search/upcoming`,
-  //   {params: {api_key: API_KEY, language:'es', query:valor },} 
-  //   )
-  //   setBusqueda(results);   
-  // }
+//buscador:
   const [estadoBusqueda, setEstadoBusqueda ] = useState('')
   const [valorBusqueda, setValorBusqueda] = useState('')
   const [valorResultado, setValorResultado]=useState([])
 
   const onSearchValue = (evento) => {
-  // console.log(evento.target.value);
-    //props.seleccionador(props.busqueda(evento.target.value));
-    //props.seleccionador(props.busqueda)
     setRenderApi(true);
     setValorBusqueda(evento.target.value);
     fetchpelisSearch();
     valorResultado.length > 1 ?  seleccionador(valorResultado) : setEstadoBusqueda ('No se encontro, vuelva a intentarlo');
-    valorResultado.length < 1 ?  seleccionador(valorResultado) : setEstadoBusqueda ('')
-    //console.log(valorResultado);         
+    valorResultado.length < 1 ?  seleccionador(valorResultado) : setEstadoBusqueda ('')       
   } 
   let encoded = valorBusqueda;
 
@@ -126,7 +76,6 @@ function App() {
       setValorResultado(results);   
   }
 
-
   /////////////////queue
   useEffect(() => {
     fetchpelisPopulares();
@@ -136,20 +85,20 @@ function App() {
     
   }, []);
 
-  /////////////////selecccionador de lista
+  /////////////////selecccionador de lista para rendirizar
   const [listaSelecionada, setListaSeleccionada]=useState(pelisPopulares)
 
   let pelisSeleccionadas = listaSelecionada;
 
   function seleccionador (seleccion){
-    setListaSeleccionada(seleccion);
-    //console.log('seleccion: '+ seleccion); 
+    setListaSeleccionada(seleccion);     
   }
 
-  ////////////////seleccionador de modo de visualizacion
-  const [modoDeLista, setModoDeListado]= useState('sin-detalle')
-  const [rankeado, setRankeado] = useState('false')
-  const [btnEliminarListaPropia, setBtnEliminarListaPropia] = useState('false')
+  ////////////////seleccionador de modo de visualizacion, con detalle, lista propia, ranqueador
+  const [modoDeLista, setModoDeListado]= useState('sin-detalle');
+  const [rankeado, setRankeado] = useState('false');
+  const [btnEliminarListaPropia, setBtnEliminarListaPropia] = useState('false'); 
+  const [persistencia, setPersistencia] = useState('1');//1 volatil, 2 localStorage, 3 fireBase.
 
   function SelecionarModoDeVista (modo){
             setModoDeListado(modo)
@@ -159,16 +108,17 @@ function App() {
   /////////////////////////////////////////
   const [formAux, setFormAux]=useState(false)///prender/apagar <<<<modal
   const [peliAGuardar, setPeliAGuardar] = useState([])
-  const [ranking, setRanking] = useState ();
+  const [ranking, setRanking] = useState ();//guardar ranking
+  //listasvolatiles
   const [listAux,setListAux] = useState([]);////lista proxima a ver
   const [listVolverVer, setVolverVer] = useState([]);
   const [listVisto, setVisto] = useState([]);
-  const [persistencia, setPersistencia] = useState('1');//1 volatil, 2 localStorage, 3 fireBase.
+  //listas en storage 
   const [storagePAV, setStoragePAV] = useState ([]);
   const [storageV, setStorageV] = useState ([]);
   const [storageVV, setStorageVV] = useState ([]);
 
-
+////////////////////////////////////////////////funciones de carga de listas
     function CargarListVisto (objeto){
     listVisto.push(objeto)    
     }
@@ -207,7 +157,7 @@ function App() {
 
 
 
-//////////////////////////////////verificacion de persistencia:
+//////////////////////////////////crear listas en storage si no existen:
 let listaEnStoragePAV = JSON.parse(localStorage.getItem('listaPAV_V4'));
 let listaEnStorageV= JSON.parse(localStorage.getItem('listaV_V4'));
 let listaEnStorageVV= JSON.parse(localStorage.getItem('listaVV_V4'));
@@ -231,7 +181,8 @@ if (persistencia==='2'){
 
 
 
-////////////////////////////
+////////////////////////////renderizar api o no.
+
   const [renderApi,setRenderApi] = useState(true);
   
 /////////////////////////filtrar introduccion de objeto en un array
@@ -241,14 +192,6 @@ if (persistencia==='2'){
     let objetoEncontrado = array.find(function(objeto) {
       return objeto.id === objetoBuscado.id 
     });
-
-    if (objetoEncontrado) {      
-      //console.log('Objeto encontrado');
-      return true
-    } else {
-      //console.log('Objeto no encontrado');
-      return false
-    }
   }
 ////////////////////////////////////////////////////////return
   return (
