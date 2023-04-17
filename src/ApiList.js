@@ -6,6 +6,8 @@ function ApiList (props){
     //props.setPeliAGuardar () <= aca dentro va un objeto x.title x.url x.overview x.id
 
     const URL_IMAGE = "https://image.tmdb.org/t/p/original";
+    console.log('en api');
+    console.log(props.pelis);
     
     return(
         <React.Fragment>

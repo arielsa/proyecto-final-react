@@ -31,25 +31,58 @@ function FormAux(props){
     }
 
     const seleccionProxima = () => {
-        let permitirCarga;       
+        let permitirCarga; 
+
+        console.log('proxima');
+        console.log( 'persistencia antes: '+ props.persistencia);
         
-        if (props.listAux.length>0){                    
-            props.filtroDeIntroduccion(peliMarcada,props.listAux) ? permitirCarga= false : permitirCarga = true ;
-            //console.log(permitirCarga);
-            if (permitirCarga){
-                props.CargarListAux(peliMarcada)
-                setVisto(false)
-                props.setFormAux(false) 
-            } else{
-                setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                //console.log('no puede ingresar objeto al array');
-            }
-        }else {
-            props.CargarListAux(peliMarcada)
-            setVisto(false)
-            props.setFormAux(false)    
-        }       
-        //console.log(peliMarcada.url);
+        switch (props.persistencia) {
+            case '1':
+                if (props.listAux.length>0){                    
+                    props.filtroDeIntroduccion(peliMarcada,props.listAux) ? permitirCarga= false : permitirCarga = true ;
+                    //console.log(permitirCarga);
+                    if (permitirCarga){
+                        props.CargarListAux(peliMarcada)
+                        setVisto(false)
+                        props.setFormAux(false) 
+                    } else{
+                        setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
+                        //console.log('no puede ingresar objeto al array');
+                    }
+                }else {
+                    props.CargarListAux(peliMarcada)
+                    setVisto(false)
+                    props.setFormAux(false)    
+                }       
+                //console.log(peliMarcada.url);                
+                break;
+            case '2':
+                if (props.storagePAV.length>0){                    
+                    props.filtroDeIntroduccion(peliMarcada,props.storagePAV) ? permitirCarga= false : permitirCarga = true ;
+                    //console.log(permitirCarga);
+                    if (permitirCarga){
+                        props.cargarStoragePAV(peliMarcada)
+                        setVisto(false)
+                        props.setFormAux(false) 
+                    } else{
+                        setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
+                        //console.log('no puede ingresar objeto al array');
+                    }
+                }else {
+                    props.cargarStoragePAV(peliMarcada)
+                    setVisto(false)
+                    props.setFormAux(false)    
+                } 
+
+                break;
+            case '3':
+                break;
+        
+            default:
+                break;
+        }
+        
+
     }
 
         /////////////////////////listVolverVer o listVisto
@@ -114,6 +147,23 @@ function FormAux(props){
         });
         //console.log(indiceObjetoBorrar);
         props.pelisSeleccionadas.splice(indiceObjetoBorrar,1);
+        
+        if(props.persistencia==='2')
+        {
+            /*
+            agarrar la lista del storage y parcearla
+            la mapeo busco objeto
+            lo borro 
+            y vuelvo a setear el storage
+             */
+            let listaAcambiar = JSON.parse(localStorage.getItem('listaPAV_V4'))
+            localStorage.removeItem('listaPAV_V4')
+            let indiceObjetoBorrarStorage = listaAcambiar.findIndex(function(objeto) {
+                return objeto.id === peliMarcada.id 
+            });
+            listaAcambiar.splice(indiceObjetoBorrarStorage,1);
+            localStorage.setItem('listaPAV_V4',JSON.stringify(listaAcambiar))
+        }
         props.setFormAux(false)       
     }
     

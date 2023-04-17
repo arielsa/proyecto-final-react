@@ -25,7 +25,20 @@ function Menu2 (props){
 
     function seleccionProximaVer () { 
         props.setRenderApi(false);
-        props.seleccionador(props.listAux);
+        switch (props.persistencia) {
+            case '1':
+                props.seleccionador(props.listAux);
+                break;
+            case '2':                
+                props.seleccionador(props.listaEnStoragePAV );/// solo para el cambio de vista
+                console.log(' lista1:  ' + props.storagePAV);                
+                break;
+        
+            default:
+                break;
+        }
+
+        
         props.setRankeado(false);
         props.setBtnEliminarListaPropia(true)
     }

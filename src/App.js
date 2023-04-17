@@ -142,7 +142,8 @@ function App() {
   let pelisSeleccionadas = listaSelecionada;
 
   function seleccionador (seleccion){
-    setListaSeleccionada(seleccion); 
+    setListaSeleccionada(seleccion);
+    console.log('seleccion: '+ seleccion); 
   }
 
   ////////////////seleccionador de modo de visualizacion
@@ -155,25 +156,51 @@ function App() {
   }
 
   let visibilidad = modoDeLista;
-  /////////////////////////////////////////creando en storage lista aux
+  /////////////////////////////////////////
   const [formAux, setFormAux]=useState(false)///prender/apagar <<<<modal
   const [peliAGuardar, setPeliAGuardar] = useState([])
   const [ranking, setRanking] = useState ();
-  const [listAux,setListAux] = useState([]);////lista volver a ver
+  const [listAux,setListAux] = useState([]);////lista proxima a ver
   const [listVolverVer, setVolverVer] = useState([]);
   const [listVisto, setVisto] = useState([]);
-
+  const [persistencia, setPersistencia] = useState('1');//1 volatil, 2 localStorage, 3 fireBase.
+  const [storagePAV, setStoragePAV] = useState ([]);
 
 
     function CargarListVisto (objeto){
     listVisto.push(objeto)    
-  }
+    }
   function CargarListVolverVer (objeto){
     listVolverVer.push(objeto)    
   }
   function CargarListAux (objeto){
     listAux.push(objeto)
   }
+
+  function cargarStoragePAV(objeto){
+    storagePAV.push(objeto);
+    //let objetoSting = JSON.stringify(objeto);
+    let listaEnStoragePAV = JSON.parse(localStorage.getItem('listaPAV_V4'));
+    listaEnStoragePAV.push(objeto);
+    localStorage.removeItem('listaPAV_V4')
+    localStorage.setItem('listaPAV_V4',JSON.stringify(listaEnStoragePAV))
+  }
+
+
+
+//////////////////////////////////verificacion de persistencia:
+let listaEnStoragePAV = JSON.parse(localStorage.getItem('listaPAV_V4'))
+
+if (persistencia==='2'){
+  //console.log('persistencia 2');
+  if (!listaEnStoragePAV){
+    localStorage.setItem('listaPAV_V4','[]')      
+    console.log('camibio de lista a storage ');
+  } 
+}
+
+
+
 ////////////////////////////
   const [renderApi,setRenderApi] = useState(true);
   
@@ -199,7 +226,8 @@ function App() {
 
     <div>{/*menu header */}
       <Menu2 listAux={listAux} listVolverVer={listVolverVer}
-      listVisto={listVisto} 
+      listVisto={listVisto} persistencia = {persistencia}
+      storagePAV = {storagePAV} listaEnStoragePAV = {listaEnStoragePAV }
       setRenderApi={setRenderApi} seleccionador={seleccionador}  
       populares={pelisPopulares}  enCartelera={pelisNowPaying}      
       setRankeado={setRankeado} setBtnEliminarListaPropia={setBtnEliminarListaPropia} />
@@ -210,7 +238,11 @@ function App() {
 
     <EstadoDeBusqueda estado={estadoBusqueda} />
     
-    <SeleccionDeCarga SelecionarModoDeVista={SelecionarModoDeVista} />
+    <SeleccionDeCarga SelecionarModoDeVista={SelecionarModoDeVista} 
+    persistencia={persistencia} setPersistencia= {setPersistencia} 
+    listaEnStoragePAV = {listaEnStoragePAV} storagePAV = {storagePAV}
+    listAux={listAux} setListAux = {setListAux} 
+    seleccionador = {seleccionador} setStoragePAV = {setStoragePAV}/>
 
     <ImputOutPutPrueba></ImputOutPutPrueba>   
 
@@ -223,7 +255,11 @@ function App() {
     filtroDeIntroduccion={filtroDeIntroduccion} btnEliminarListaPropia={btnEliminarListaPropia}
     listAux={listAux} CargarListAux={CargarListAux} 
     setRanking={setRanking} ranking={ranking} formAux={formAux} 
-    setFormAux={setFormAux} peliAGuardar={peliAGuardar}  />
+    setFormAux={setFormAux} peliAGuardar={peliAGuardar} 
+    persistencia={persistencia} setPersistencia= {setPersistencia}
+    storagePAV={storagePAV} setStoragePAV = {setStoragePAV}
+    cargarStoragePAV = {cargarStoragePAV}
+    />
 
     <div> 
       {/*renderizado de pelis */}
