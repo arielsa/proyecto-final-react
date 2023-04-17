@@ -30,8 +30,9 @@ function Menu2 (props){
                 props.seleccionador(props.listAux);
                 break;
             case '2':                
-                props.seleccionador(props.listaEnStoragePAV );/// solo para el cambio de vista
-                console.log(' lista1:  ' + props.storagePAV);                
+                props.seleccionador(props.storagePAV );/// solo para el cambio de vista
+                //console.log(' lista1:  ' + props.storagePAV);
+                props.setSelecStorageBorrar('listaPAV_V4');                
                 break;
         
             default:
@@ -45,7 +46,20 @@ function Menu2 (props){
 
     function seleccionVolverVer () { 
         props.setRenderApi(false);
-        props.seleccionador(props.listVolverVer);
+        
+        switch (props.persistencia) {
+            case '1':
+                props.seleccionador(props.listVolverVer);
+                break;
+            case '2':                
+                props.seleccionador(props.storageVV );/// solo para el cambio de vista
+                //console.log(' lista1:  ' + props.storageVV);
+                props.setSelecStorageBorrar('listaVV_V4');                
+                break;
+        
+            default:
+                break;
+        }
         //console.log(props.listVolverVer);
         props.setRankeado(true);
         props.setBtnEliminarListaPropia(true)
@@ -54,7 +68,20 @@ function Menu2 (props){
 
     function seleccionVisto () { 
         props.setRenderApi(false);// si
-        props.seleccionador(props.listVisto);// cambiar
+        
+        switch (props.persistencia) {
+            case '1':
+                props.seleccionador(props.listVisto);
+                break;
+            case '2':                
+                props.seleccionador(props.storageV);/// solo para el cambio de vista
+               // console.log(' lista1:  ' + props.storageV);
+                props.setSelecStorageBorrar('listaV_V4');                
+                break;
+        
+            default:
+                break;
+        }
         //console.log(props.listVisto);// camibar
         props.setRankeado(true);// si
         props.setBtnEliminarListaPropia(true)//si

@@ -6,6 +6,7 @@ import { useState } from 'react';
 function FormAux(props){
     //props.renderApi (es true en mis listas personales)
     //props.formAux
+    const selecStorageBorrar = props.selecStorageBorrar
     const[mensajePeliRepetida, setMensajePeliRepetida  ]  = useState('')
     let title = props.peliAGuardar.title;
     let id = props.peliAGuardar.id;
@@ -31,12 +32,10 @@ function FormAux(props){
     }
 
     const seleccionProxima = () => {
+        setVisto(false) 
         let permitirCarga; 
-
-        console.log('proxima');
-        console.log( 'persistencia antes: '+ props.persistencia);
-        
-        switch (props.persistencia) {
+        setMensajePeliRepetida('')
+         switch (props.persistencia) {
             case '1':
                 if (props.listAux.length>0){                    
                     props.filtroDeIntroduccion(peliMarcada,props.listAux) ? permitirCarga= false : permitirCarga = true ;
@@ -89,25 +88,60 @@ function FormAux(props){
         const [listRankeadaGuardar, setListRankeadaGuardar] = React.useState('')
 
     const seleccionVolverVer = () =>{
+        setMensajePeliRepetida('')
         setListRankeadaGuardar('volverVer')
         let permitirCarga;
-        if(props.listVolverVer.length>0)
-        {
-            props.filtroDeIntroduccion(peliMarcada,props.listVolverVer) ? permitirCarga= false : permitirCarga = true ;
-            if (permitirCarga){
-                setVisto(true)                               
-            } else{
-                setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                //console.log('no puede ingresar objeto al array');
-            }
-        }
-        else{
-            setVisto(true)            
-        }     
+        switch (props.persistencia) {
+            case '1':                    
+                if(props.listVolverVer.length>0)
+                {
+                    props.filtroDeIntroduccion(peliMarcada,props.listVolverVer) ? permitirCarga= false : permitirCarga = true ;
+                    if (permitirCarga){
+                        setVisto(true)                               
+                    } else{
+                        setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
+                        //console.log('no puede ingresar objeto al array');
+                    }
+                }
+                else{
+                    setVisto(true)            
+                } 
+                break;
+            case '2':
+                if (props.storageVV.length>0){                    
+                    props.filtroDeIntroduccion(peliMarcada,props.storageVV) ? permitirCarga= false : permitirCarga = true ;
+                    //console.log(permitirCarga);
+                    if (permitirCarga){
+                        setVisto(true) 
+                    } else{
+                        setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
+                        //console.log('no puede ingresar objeto al array');
+                    }
+                }else {
+                    setVisto(true)    
+                } 
+
+                break;
+        
+            default:
+                break;
+        }        
     }
 
     const guardarSeleccionVolverVer= ()=>{ // se guarda con el boton guardar del rankeador
-        props.CargarListVolverVer(peliMarcada)        
+       
+       switch (props.persistencia) {
+        case '1':
+            props.CargarListVolverVer(peliMarcada)
+            break;
+        case '2':
+            props.cargarStorageVV(peliMarcada)  
+            break;
+       
+        default:
+            break;
+       }
+      
         //console.log(props.ranking + 'ranking' );
         //console.log(peliMarcada);
         props.setFormAux(false)
@@ -115,32 +149,71 @@ function FormAux(props){
     }
 
     const seleccionVisto = () =>{
+        setMensajePeliRepetida('')
         setListRankeadaGuardar('visto')
         let permitirCarga;
-        if(props.listVisto.length>0)
-        {
-            props.filtroDeIntroduccion(peliMarcada,props.listVisto) ? permitirCarga= false : permitirCarga = true ;
-            if (permitirCarga){
-                setVisto(true)                               
-            } else{
-                setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                //console.log('no puede ingresar objeto al array');
-            }
-        }
-        else{
-            setVisto(true)            
-        }     
+        switch (props.persistencia) {
+            case '1':                    
+                if(props.listVisto.length>0)
+                {
+                    props.filtroDeIntroduccion(peliMarcada,props.listVisto) ? permitirCarga= false : permitirCarga = true ;
+                    if (permitirCarga){
+                        setVisto(true)                               
+                    } else{
+                        setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
+                        //console.log('no puede ingresar objeto al array');
+                    }
+                }
+                else{
+                    setVisto(true)            
+                } 
+                break;
+            case '2':
+                if (props.storageV.length>0){ 
+                    console.log('pelisselecionadas: ');
+                    console.log(props.pelisSeleccionadas);                   
+                    props.filtroDeIntroduccion(peliMarcada,props.storageV) ? permitirCarga= false : permitirCarga = true ;
+                    //console.log(permitirCarga);
+                    if (permitirCarga){
+                        setVisto(true) 
+                    } else{
+                        setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
+                        //console.log('no puede ingresar objeto al array');
+                    }
+                }else {
+                    setVisto(true)    
+                } 
+
+                break;
+        
+            default:
+                break;
+        }   
     }
 
     const guardarSeleccionVisto= ()=>{ // se guarda con el boton guardar del rankeador
-        props.CargarListVisto(peliMarcada)        
-        //console.log(props.ranking + 'ranking' );
-        //console.log(peliMarcada);        
+        switch (props.persistencia) {
+            case '1':
+                console.log('pelisselecionadas: ');
+                console.log(props.pelisSeleccionadas);
+                props.CargarListVisto(peliMarcada)
+                break;
+            case '2':
+                console.log('pelisselecionadas: ');
+                console.log(props.pelisSeleccionadas);
+                props.cargarStorageV(peliMarcada)  
+                break;
+           
+            default:
+                break;
+           }       
         setVisto(false) //cierro el rankeador
         props.setFormAux(false)       
     }
 
     const eliminar = ()=>{
+        console.log('pelisselecionadas: ');
+        console.log(props.pelisSeleccionadas);
 
         let indiceObjetoBorrar = props.pelisSeleccionadas.findIndex(function(objeto) {
             return objeto.id === peliMarcada.id 
@@ -150,19 +223,14 @@ function FormAux(props){
         
         if(props.persistencia==='2')
         {
-            /*
-            agarrar la lista del storage y parcearla
-            la mapeo busco objeto
-            lo borro 
-            y vuelvo a setear el storage
-             */
-            let listaAcambiar = JSON.parse(localStorage.getItem('listaPAV_V4'))
-            localStorage.removeItem('listaPAV_V4')
+            let StringListName = selecStorageBorrar
+            let listaAcambiar = JSON.parse(localStorage.getItem(StringListName))
+            localStorage.removeItem(StringListName)
             let indiceObjetoBorrarStorage = listaAcambiar.findIndex(function(objeto) {
                 return objeto.id === peliMarcada.id 
             });
             listaAcambiar.splice(indiceObjetoBorrarStorage,1);
-            localStorage.setItem('listaPAV_V4',JSON.stringify(listaAcambiar))
+            localStorage.setItem(StringListName,JSON.stringify(listaAcambiar))
         }
         props.setFormAux(false)       
     }

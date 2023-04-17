@@ -143,7 +143,7 @@ function App() {
 
   function seleccionador (seleccion){
     setListaSeleccionada(seleccion);
-    console.log('seleccion: '+ seleccion); 
+    //console.log('seleccion: '+ seleccion); 
   }
 
   ////////////////seleccionador de modo de visualizacion
@@ -165,6 +165,8 @@ function App() {
   const [listVisto, setVisto] = useState([]);
   const [persistencia, setPersistencia] = useState('1');//1 volatil, 2 localStorage, 3 fireBase.
   const [storagePAV, setStoragePAV] = useState ([]);
+  const [storageV, setStorageV] = useState ([]);
+  const [storageVV, setStorageVV] = useState ([]);
 
 
     function CargarListVisto (objeto){
@@ -186,16 +188,44 @@ function App() {
     localStorage.setItem('listaPAV_V4',JSON.stringify(listaEnStoragePAV))
   }
 
+  function cargarStorageV(objeto){
+    storageV.push(objeto);
+    //let objetoSting = JSON.stringify(objeto);
+    let listaEnStorageV = JSON.parse(localStorage.getItem('listaV_V4'));
+    listaEnStorageV.push(objeto);
+    localStorage.removeItem('listaV_V4')
+    localStorage.setItem('listaV_V4',JSON.stringify(listaEnStorageV))
+  }
+  function cargarStorageVV(objeto){
+    storageVV.push(objeto);
+    //let objetoSting = JSON.stringify(objeto);
+    let listaEnStorageVV = JSON.parse(localStorage.getItem('listaVV_V4'));
+    listaEnStorageVV.push(objeto);
+    localStorage.removeItem('listaVV_V4')
+    localStorage.setItem('listaVV_V4',JSON.stringify(listaEnStorageVV))
+  }
+
 
 
 //////////////////////////////////verificacion de persistencia:
-let listaEnStoragePAV = JSON.parse(localStorage.getItem('listaPAV_V4'))
+let listaEnStoragePAV = JSON.parse(localStorage.getItem('listaPAV_V4'));
+let listaEnStorageV= JSON.parse(localStorage.getItem('listaV_V4'));
+let listaEnStorageVV= JSON.parse(localStorage.getItem('listaVV_V4'));
+let [selecStorageBorrar, setSelecStorageBorrar] = useState('');
 
 if (persistencia==='2'){
   //console.log('persistencia 2');
   if (!listaEnStoragePAV){
     localStorage.setItem('listaPAV_V4','[]')      
-    console.log('camibio de lista a storage ');
+    //console.log('camibio de lista a storage ');
+  } 
+  if (!listaEnStorageV){
+    localStorage.setItem('listaV_V4','[]')      
+    //console.log('camibio de lista a storage ');
+  } 
+  if (!listaEnStorageVV){
+    localStorage.setItem('listaVV_V4','[]')      
+    //console.log('camibio de lista a storage ');
   } 
 }
 
@@ -228,9 +258,13 @@ if (persistencia==='2'){
       <Menu2 listAux={listAux} listVolverVer={listVolverVer}
       listVisto={listVisto} persistencia = {persistencia}
       storagePAV = {storagePAV} listaEnStoragePAV = {listaEnStoragePAV }
+      listaEnStorageVV = {listaEnStorageVV }
+      listaEnStorageV = {listaEnStorageV }
+      storageV = {storageV} storageVV = {storageVV} 
       setRenderApi={setRenderApi} seleccionador={seleccionador}  
       populares={pelisPopulares}  enCartelera={pelisNowPaying}      
-      setRankeado={setRankeado} setBtnEliminarListaPropia={setBtnEliminarListaPropia} />
+      setRankeado={setRankeado} setBtnEliminarListaPropia={setBtnEliminarListaPropia}
+      setSelecStorageBorrar={setSelecStorageBorrar} />
 
     <SearchPelis setRenderApi={setRenderApi} setBtnEliminarListaPropia = {setBtnEliminarListaPropia}
     seleccionador={seleccionador} onSearchValue={onSearchValue} 
@@ -241,7 +275,11 @@ if (persistencia==='2'){
     <SeleccionDeCarga SelecionarModoDeVista={SelecionarModoDeVista} 
     persistencia={persistencia} setPersistencia= {setPersistencia} 
     listaEnStoragePAV = {listaEnStoragePAV} storagePAV = {storagePAV}
+    listaEnStorageV = {listaEnStorageV} storageV = {storageV}
+    listaEnStorageVV = {listaEnStorageVV} storageVV = {storageVV}
+    listVolverVer={listVolverVer} setVolverVer = {setVolverVer} 
     listAux={listAux} setListAux = {setListAux} 
+    listVisto={listVisto} setVisto = {setVisto} 
     seleccionador = {seleccionador} setStoragePAV = {setStoragePAV}/>
 
     <ImputOutPutPrueba></ImputOutPutPrueba>   
@@ -249,6 +287,9 @@ if (persistencia==='2'){
     </div>
 
     <FormAux 
+    cargarStorageVV = {cargarStorageVV}
+    cargarStorageV = {cargarStorageV}
+    selecStorageBorrar = {selecStorageBorrar}
     listVolverVer={listVolverVer} CargarListVolverVer={CargarListVolverVer}
     listVisto={listVisto} CargarListVisto={CargarListVisto}
     renderApi={renderApi} pelisSeleccionadas={pelisSeleccionadas}
@@ -258,6 +299,8 @@ if (persistencia==='2'){
     setFormAux={setFormAux} peliAGuardar={peliAGuardar} 
     persistencia={persistencia} setPersistencia= {setPersistencia}
     storagePAV={storagePAV} setStoragePAV = {setStoragePAV}
+    storageV={storageV} setStorageV = {setStorageV}
+    storageVV={storageVV} setStorageVV = {setStorageVV}
     cargarStoragePAV = {cargarStoragePAV}
     />
 

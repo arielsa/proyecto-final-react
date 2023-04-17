@@ -20,7 +20,7 @@ function SeleccionDeCarga (props){
         if (props.persistencia === '1' && primerCarga == 1 ){
             valorDefecto = true
             primerCarga =0
-            console.log('valor por defecto: '+ valorDefecto + ' primercarga: '+ primerCarga );
+            //console.log('valor por defecto: '+ valorDefecto + ' primercarga: '+ primerCarga );
         }
         
     }
@@ -31,16 +31,18 @@ function SeleccionDeCarga (props){
     function tipoDePersistencia (e){// la persistencia cambia al salir de la funcion       
         //e.preventDefault() 
         props.setPersistencia(e.target.value);
-        console.log('persistencia elegida ' + props.persistencia );
+        //console.log('persistencia elegida ' + props.persistencia );
         switch (e.target.value) {
             case '1':
                 props.setListAux([]);// vacio
                 props.seleccionador([])
+                props.setVisto([]);
+                props.setVolverVer([]);
             break;
             case '2':
                 props.setListAux(props.listaEnStoragePAV);
-                //set visdto lista de vistos en storage
-                //set volver a ver lista de volver a ver en storage
+                props.setVisto(props.listaEnStorageV)
+                props.setVolverVer(props.listaEnStorageVV) 
                 props.seleccionador([]);/// solo para el cambio de vista
                 //console.log(' lista1:  ' + props.storagePAV);                
                 break;
@@ -54,12 +56,12 @@ function SeleccionDeCarga (props){
 
 
     function activacionDePersistencia (){// list aux cambia al salir de la funcion
-        console.log(props.persistencia);
+        //console.log(props.persistencia);
         switch (props.persistencia) {
             case '2':
                 props.setListAux(props.listaEnStoragePAV);
                 props.seleccionador(props.listAux);
-                console.log(' lista2:  ' + props.listAux);
+                //console.log(' lista2:  ' + props.listAux);
                 
                 break;
         
