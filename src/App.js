@@ -117,6 +117,7 @@ function App() {
   const [storagePAV, setStoragePAV] = useState ([]);
   const [storageV, setStorageV] = useState ([]);
   const [storageVV, setStorageVV] = useState ([]);
+  
 
 ////////////////////////////////////////////////funciones de carga de listas
     function CargarListVisto (objeto){
@@ -192,6 +193,11 @@ if (persistencia==='2'){
     let objetoEncontrado = array.find(function(objeto) {
       return objeto.id === objetoBuscado.id 
     });
+    if (objetoEncontrado) {     
+      return true
+    } else {
+      return false
+    }
   }
 ////////////////////////////////////////////////////////return
   return (
