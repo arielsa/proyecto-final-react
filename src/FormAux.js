@@ -136,8 +136,7 @@ function FormAux(props){
             break;
         case '2':
             props.cargarStorageVV(peliMarcada)  
-            break;
-       
+            break;       
         default:
             break;
        }
@@ -202,8 +201,7 @@ function FormAux(props){
                 console.log('pelisselecionadas: ');
                 console.log(props.pelisSeleccionadas);
                 props.cargarStorageV(peliMarcada)  
-                break;
-           
+                break;           
             default:
                 break;
            }       

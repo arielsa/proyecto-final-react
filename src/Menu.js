@@ -29,7 +29,9 @@ function Menu2 (props){
             case '1':
                 props.seleccionador(props.listAux);
                 break;
-            case '2':                
+            case '2':
+                console.log(props.listAux); 
+                //props.seleccionador(props.listAux );               
                 props.seleccionador(props.storagePAV );/// solo para el cambio de vista
                 //console.log(' lista1:  ' + props.storagePAV);
                 props.setSelecStorageBorrar('listaPAV_V4');                

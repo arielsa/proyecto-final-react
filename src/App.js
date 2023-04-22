@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import React from 'react';
 import axios from 'axios';
 import { ImputOutPutPrueba } from './ImputOutPutPrueba';
+import db from './config/firebase';
 
 ///////////importacion de componentes
 import './App.css';
@@ -82,6 +83,10 @@ function App() {
     fetchpelisTrending();
     fetchpelisNowPaying();
     fetchpelisSearch();
+
+     obtenerStoragePAV(listaEnStoragePAV);
+     obtenerStorageV(listaEnStorageV);
+     obtenerStorageVV(listaEnStorageVV);
     
   }, []);
 
@@ -120,9 +125,9 @@ function App() {
   
 
 ////////////////////////////////////////////////funciones de carga de listas
-    function CargarListVisto (objeto){
+  function CargarListVisto (objeto){
     listVisto.push(objeto)    
-    }
+  }
   function CargarListVolverVer (objeto){
     listVolverVer.push(objeto)    
   }
@@ -138,6 +143,11 @@ function App() {
     localStorage.removeItem('listaPAV_V4')
     localStorage.setItem('listaPAV_V4',JSON.stringify(listaEnStoragePAV))
   }
+  function obtenerStoragePAV (arrayObjeto){
+    if (arrayObjeto){
+      setStoragePAV(arrayObjeto);
+    }    
+  }
 
   function cargarStorageV(objeto){
     storageV.push(objeto);
@@ -147,6 +157,11 @@ function App() {
     localStorage.removeItem('listaV_V4')
     localStorage.setItem('listaV_V4',JSON.stringify(listaEnStorageV))
   }
+  function obtenerStorageV (arrayObjeto){
+    if (arrayObjeto){
+      setStorageV(arrayObjeto);
+    }    
+  }
   function cargarStorageVV(objeto){
     storageVV.push(objeto);
     //let objetoSting = JSON.stringify(objeto);
@@ -155,6 +170,13 @@ function App() {
     localStorage.removeItem('listaVV_V4')
     localStorage.setItem('listaVV_V4',JSON.stringify(listaEnStorageVV))
   }
+  function obtenerStorageVV (arrayObjeto){
+    if (arrayObjeto){
+      setStorageVV(arrayObjeto);
+    }    
+  }
+///////////////////////////////////crear lista(coleccion) en firebase si no existe:
+                                                         let marcado;
 
 
 
@@ -164,12 +186,14 @@ let listaEnStorageV= JSON.parse(localStorage.getItem('listaV_V4'));
 let listaEnStorageVV= JSON.parse(localStorage.getItem('listaVV_V4'));
 let [selecStorageBorrar, setSelecStorageBorrar] = useState('');
 
+
 if (persistencia==='2'){
-  //console.log('persistencia 2');
+  // cargar storage state
+  
   if (!listaEnStoragePAV){
-    localStorage.setItem('listaPAV_V4','[]')      
-    //console.log('camibio de lista a storage ');
-  } 
+    localStorage.setItem('listaPAV_V4','[]')
+  
+  }
   if (!listaEnStorageV){
     localStorage.setItem('listaV_V4','[]')      
     //console.log('camibio de lista a storage ');

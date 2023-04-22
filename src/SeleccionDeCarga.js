@@ -19,7 +19,7 @@ function SeleccionDeCarga (props){
         
         if (props.persistencia === '1' && primerCarga == 1 ){
             valorDefecto = true
-            primerCarga =0
+            primerCarga = 0
             //console.log('valor por defecto: '+ valorDefecto + ' primercarga: '+ primerCarga );
         }
         
@@ -30,19 +30,28 @@ function SeleccionDeCarga (props){
 
     function tipoDePersistencia (e){// la persistencia cambia al salir de la funcion       
         //e.preventDefault() 
-        props.setPersistencia(e.target.value);
+        props.setPersistencia(e.target.value); /////// cambia la persistencia
         //console.log('persistencia elegida ' + props.persistencia );
         switch (e.target.value) {
-            case '1':
+            case '1':                
                 props.setListAux([]);// vacio
                 props.seleccionador([])
                 props.setVisto([]);
                 props.setVolverVer([]);
             break;
-            case '2':
+            case '2':                
                 props.setListAux(props.listaEnStoragePAV);
+                console.log(props.listAux);
                 props.setVisto(props.listaEnStorageV)
                 props.setVolverVer(props.listaEnStorageVV) 
+                props.seleccionador([]);/// solo para el cambio de vista
+                //console.log(' lista1:  ' + props.storagePAV);                
+                break;
+
+            case '3':
+                //props.setListAux(props.listaEnStoragePAV);
+                //props.setVisto(props.listaEnStorageV)
+                //props.setVolverVer(props.listaEnStorageVV) 
                 props.seleccionador([]);/// solo para el cambio de vista
                 //console.log(' lista1:  ' + props.storagePAV);                
                 break;

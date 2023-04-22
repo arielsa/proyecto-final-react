@@ -6,11 +6,11 @@ function ImputOutPutPrueba() {
     const [inputValue, setInputValue] = useState('');
     const[inFireBase, setInFireBase]=useState('');
   
-    const handleFormSubmit = async (event) => {
+    const handleFormSubmit = async (event) => { //////////////envio
       event.preventDefault();
       //console.log('Agregando mensaje:', inputValue);
       try {
-        const docRef = await db.collection('prueba').add({
+        const docRef = await db.collection('prueba2').add({
           message: inputValue,
           timestamp: new Date(),
         });
@@ -26,9 +26,9 @@ function ImputOutPutPrueba() {
       //console.log('Input actualizado:', event.target.value);
     };
 
-    const fetchFireBase = async ()=>{
+    const fetchFireBase = async ()=>{////////////////////extraccion
       try{
-        const snapshot = await db.collection('prueba').get();
+        const snapshot = await db.collection('prueba2').get();
         let fetchedData = '';
         snapshot.forEach((doc) => {
           fetchedData += doc.data().message + '\n';
@@ -43,7 +43,7 @@ function ImputOutPutPrueba() {
   
     return (
       <React.Fragment>
-        <div className='inactive'>
+        <div className='inactiv'>
           <form onSubmit={handleFormSubmit}>
             <input type="text" value={inputValue} onChange={handleInputChange} />
             <button type="submit">Agregar</button>
