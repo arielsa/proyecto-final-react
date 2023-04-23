@@ -41,7 +41,7 @@ function SeleccionDeCarga (props){
             break;
             case '2':                
                 props.setListAux(props.listaEnStoragePAV);
-                console.log(props.listAux);
+                //console.log(props.listAux);
                 props.setVisto(props.listaEnStorageV)
                 props.setVolverVer(props.listaEnStorageVV) 
                 props.seleccionador([]);/// solo para el cambio de vista
@@ -51,9 +51,9 @@ function SeleccionDeCarga (props){
             case '3':
                 //props.setListAux(props.listaEnStoragePAV);
                 //props.setVisto(props.listaEnStorageV)
-                //props.setVolverVer(props.listaEnStorageVV) 
+                //console.log(props.inFireBase) 
                 props.seleccionador([]);/// solo para el cambio de vista
-                //console.log(' lista1:  ' + props.storagePAV);                
+                                
                 break;
         
             default:
@@ -71,7 +71,7 @@ function SeleccionDeCarga (props){
                 <span className="vista" >modo de vista: </span>
                 <span className="m-1 icono-seleccionador" onClick={listarConDetalle}><i className="fa-solid fa-list"></i></span>
                 <span className="m-1 icono-seleccionador" onClick={listarSinDetalle} ><i className="fas fa-th-large"></i></span>
-                <span className="modo-guardado"  >modo de guardado:</span>
+                <span className="modo-guardado"  >Persistencia:</span>
                 <input type="radio" name="modo-guardado" value=  '1' id="app" checked={valorDefecto} onChange={e=>tipoDePersistencia(e)} />
                 <label htmlFor='app' >Volatil</label>
                 <input type="radio" name="modo-guardado" value= '2' id="local" onChange={e=>tipoDePersistencia(e)} />

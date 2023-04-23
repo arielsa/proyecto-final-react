@@ -8,10 +8,5 @@ import { SearchPelis } from './SearchPelis';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
-  
-
-    <App />
-
-  
+    <App />  
 );

@@ -30,11 +30,16 @@ function Menu2 (props){
                 props.seleccionador(props.listAux);
                 break;
             case '2':
-                console.log(props.listAux); 
+                //console.log(props.listAux); 
                 //props.seleccionador(props.listAux );               
                 props.seleccionador(props.storagePAV );/// solo para el cambio de vista
                 //console.log(' lista1:  ' + props.storagePAV);
                 props.setSelecStorageBorrar('listaPAV_V4');                
+                break;
+            case '3':                             
+                props.seleccionador(props.firebasePAV);/// solo para el cambio de vista                
+                //props.setSelecStorageBorrar('listaPAV_V4');
+                props.setColectionName('firebasePAV');                
                 break;
         
             default:
@@ -48,7 +53,7 @@ function Menu2 (props){
 
     function seleccionVolverVer () { 
         props.setRenderApi(false);
-        
+        //inFireBase
         switch (props.persistencia) {
             case '1':
                 props.seleccionador(props.listVolverVer);
@@ -57,6 +62,11 @@ function Menu2 (props){
                 props.seleccionador(props.storageVV );/// solo para el cambio de vista
                 //console.log(' lista1:  ' + props.storageVV);
                 props.setSelecStorageBorrar('listaVV_V4');                
+                break;
+            case '3':                             
+                props.seleccionador(props.firebaseVV);/// solo para el cambio de vista                
+                //props.setSelecStorageBorrar('listaPAV_V4');
+                props.setColectionName('firebaseVV');                
                 break;
         
             default:
@@ -79,6 +89,11 @@ function Menu2 (props){
                 props.seleccionador(props.storageV);/// solo para el cambio de vista
                // console.log(' lista1:  ' + props.storageV);
                 props.setSelecStorageBorrar('listaV_V4');                
+                break;
+            case '3':                             
+                props.seleccionador(props.firebaseV);/// solo para el cambio de vista                
+                //props.setSelecStorageBorrar('listaPAV_V4');
+                props.setColectionName('firebaseV');                
                 break;
         
             default:

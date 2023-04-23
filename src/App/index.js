@@ -2,21 +2,18 @@
 import {useState, useEffect} from 'react';
 import React from 'react';
 import axios from 'axios';
-import { ImputOutPutPrueba } from './ImputOutPutPrueba';
-import db from './config/firebase';
+import db from '../config/firebase';
 
 ///////////importacion de componentes
 import './App.css';
-import { Menu2 } from './Menu.js';
-import { SearchPelis } from './SearchPelis.js'; 
-import { PelisListDetalle } from './PelisListDetalle.js';
-import {Peli} from './Peli.js';
-import { PelisVistasList } from './PelisVistasList.js';
-import { ApiList } from './ApiList.js';
-import { Ranqueador } from './Ranqueador.js';
-import {SeleccionDeCarga} from './SeleccionDeCarga.js'
-import { EstadoDeBusqueda } from './EstadoDeBusqueda.js';
-import { FormAux } from './FormAux.js';
+import { Menu2 } from '../Menu.js';
+import { SearchPelis } from '../SearchPelis.js'; 
+import { PelisListDetalle } from '../PelisListDetalle.js';
+import {Peli} from '../Peli.js';
+import { ApiList } from '../ApiList.js';
+import {SeleccionDeCarga} from '../SeleccionDeCarga.js'
+import { EstadoDeBusqueda } from '../EstadoDeBusqueda.js';
+import { FormAux } from '../FormAux.js';
 
 
 const API_URL = "https://api.themoviedb.org/3";
@@ -84,9 +81,13 @@ function App() {
     fetchpelisNowPaying();
     fetchpelisSearch();
 
-     obtenerStoragePAV(listaEnStoragePAV);
-     obtenerStorageV(listaEnStorageV);
-     obtenerStorageVV(listaEnStorageVV);
+    obtenerStoragePAV(listaEnStoragePAV);
+    obtenerStorageV(listaEnStorageV);
+    obtenerStorageVV(listaEnStorageVV);
+
+    listaEnFirebasePAV();
+    listaEnFirebaseV();
+    listaEnFirebaseVV();
     
   }, []);
 
@@ -122,9 +123,14 @@ function App() {
   const [storagePAV, setStoragePAV] = useState ([]);
   const [storageV, setStorageV] = useState ([]);
   const [storageVV, setStorageVV] = useState ([]);
+  //listas en firebase 
+  const [firebasePAV, setFirebasePAV] = useState ([]);
+  const [firebaseV, setFirebaseV] = useState ([]);
+  const [firebaseVV, setFirebaseVV] = useState ([]);
+  const [colectionName,setColectionName] = useState('')
   
-
-////////////////////////////////////////////////funciones de carga de listas
+//peliAGuardar
+////////////////////////////////////////////////funciones de carga de listas volatiles
   function CargarListVisto (objeto){
     listVisto.push(objeto)    
   }
@@ -134,7 +140,7 @@ function App() {
   function CargarListAux (objeto){
     listAux.push(objeto)
   }
-
+///////////////////////////////////////////listas de carga en storage
   function cargarStoragePAV(objeto){
     storagePAV.push(objeto);
     //let objetoSting = JSON.stringify(objeto);
@@ -148,7 +154,6 @@ function App() {
       setStoragePAV(arrayObjeto);
     }    
   }
-
   function cargarStorageV(objeto){
     storageV.push(objeto);
     //let objetoSting = JSON.stringify(objeto);
@@ -175,9 +180,138 @@ function App() {
       setStorageVV(arrayObjeto);
     }    
   }
-///////////////////////////////////crear lista(coleccion) en firebase si no existe:
-                                                         let marcado;
+//////////////////////////////////////////listas de carga en firebase
+ async function cargarFirebasePAV(objeto) { //////////////envio  
+  try {
+    const docRef = await db.collection('firebasePAV').add({
+      message: objeto,
+      timestamp: new Date(),
+    });
+    //console.log('Nueva peli cargada con ID:', docRef.id);    
+  } catch (error) {
+    //console.error('Error al agregar peli:', error);
+  }
+};
+async function cargarFirebaseV(objeto) { //////////////envio  
+  try {
+    const docRef = await db.collection('firebaseV').add({
+      message: objeto,
+      timestamp: new Date(),
+    });
+    console.log('Nueva peli cargada con ID:', docRef.id);    
+  } catch (error) {
+    //console.error('Error al agregar peli:', error);
+  }
+};
+async function cargarFirebaseVV(objeto) { //////////////envio  
+  try {
+    const docRef = await db.collection('firebaseVV').add({
+      message: objeto,
+      timestamp: new Date(),
+    });
+    console.log('Nueva peli cargada con ID:', docRef.id);    
+  } catch (error) {
+    //console.error('Error al agregar peli:', error);
+  }
+};
+/////////////////////////////////////////eliminar documento de firebase
+async function borrarDocumentoEnFirebase(id,colectionName ) {
+  try {
+    const docRef = db.collection(colectionName).doc(id);
+    await docRef.delete();
+    //console.log('Documento eliminado exitosamente');
+  } catch (error) {
+    console.error('Error al eliminar documento:', error);
+  }
+}
 
+///////////////////////////////////crear lista(coleccion) en firebase si no existe:
+
+async function listaEnFirebasePAV(){////////////////////extraccion y cargado de state
+  try{
+    //console.log('pedido a firebase');
+    const snapshot = await db.collection('firebasePAV').get();
+    let fetchedData = [];
+    snapshot.forEach((doc) => {
+      let docData = doc.data().message;      
+      let docObjet = {
+        id : doc.id,
+        overview : docData.overview,
+        ranking : docData.ranking,
+        url : docData.url,
+        title : docData.title,
+        //docIde : doc.id
+      };
+      fetchedData.push(docObjet);
+    });
+  let fetchedDataString = JSON.stringify(fetchedData)
+   //console.log( fetchedDataString);  
+   //console.log(fetchedData);
+  setFirebasePAV(fetchedData);
+    
+  }catch(error){console.error('Error al recuperar documentos:', error);}
+  
+} 
+async function listaEnFirebaseV(){////////////////////extraccion y cargado de state
+  try{
+    //console.log('pedido a firebase');
+    const snapshot = await db.collection('firebaseV').get();
+    let fetchedData = [];
+    snapshot.forEach((doc) => {
+      let docData = doc.data().message;      
+      let docObjet = {
+        id : doc.id,
+        overview : docData.overview,
+        ranking : docData.ranking,
+        url : docData.url,
+        title : docData.title,
+        ranking : docData.ranking, 
+      };
+      fetchedData.push(docObjet);
+    });
+  let fetchedDataString = JSON.stringify(fetchedData)
+   //console.log( fetchedDataString);  
+   //console.log(fetchedData);
+  setFirebaseV(fetchedData);
+    
+  }catch(error){console.error('Error al recuperar documentos:', error);}
+  
+} 
+async function listaEnFirebaseVV(){////////////////////extraccion y cargado de state
+  try{
+    //console.log('pedido a firebase');
+    const snapshot = await db.collection('firebaseVV').get();
+    let fetchedData = [];
+    snapshot.forEach((doc) => {
+      let docData = doc.data().message;      
+      let docObjet = {
+        id : doc.id,
+        overview : docData.overview,
+        ranking : docData.ranking,
+        url : docData.url,
+        title : docData.title,
+        ranking : docData.ranking, 
+      };
+      fetchedData.push(docObjet);
+    });
+  let fetchedDataString = JSON.stringify(fetchedData)
+   //console.log( fetchedDataString);  
+   //console.log(fetchedData);
+  setFirebaseVV(fetchedData);
+    
+  }catch(error){console.error('Error al recuperar documentos:', error);}
+  
+} 
+
+if (persistencia==='3'){
+  // cargar storage state
+  
+  if (listaEnFirebasePAV){
+    //console.log(firebasePAV);  
+  }
+
+}
+//
 
 
 //////////////////////////////////crear listas en storage si no existen:
@@ -185,7 +319,6 @@ let listaEnStoragePAV = JSON.parse(localStorage.getItem('listaPAV_V4'));
 let listaEnStorageV= JSON.parse(localStorage.getItem('listaV_V4'));
 let listaEnStorageVV= JSON.parse(localStorage.getItem('listaVV_V4'));
 let [selecStorageBorrar, setSelecStorageBorrar] = useState('');
-
 
 if (persistencia==='2'){
   // cargar storage state
@@ -203,9 +336,6 @@ if (persistencia==='2'){
     //console.log('camibio de lista a storage ');
   } 
 }
-
-
-
 ////////////////////////////renderizar api o no.
 
   const [renderApi,setRenderApi] = useState(true);
@@ -215,7 +345,7 @@ if (persistencia==='2'){
   function filtroDeIntroduccion(objetoBuscado,array){
     
     let objetoEncontrado = array.find(function(objeto) {
-      return objeto.id === objetoBuscado.id 
+      return objeto.title === objetoBuscado.title 
     });
     if (objetoEncontrado) {     
       return true
@@ -229,15 +359,19 @@ if (persistencia==='2'){
 
     <div>{/*menu header */}
       <Menu2 listAux={listAux} listVolverVer={listVolverVer}
-      listVisto={listVisto} persistencia = {persistencia}
+      listVisto={listVisto} persistencia = {persistencia}      
       storagePAV = {storagePAV} listaEnStoragePAV = {listaEnStoragePAV }
+      setColectionName = {setColectionName}
       listaEnStorageVV = {listaEnStorageVV }
       listaEnStorageV = {listaEnStorageV }
       storageV = {storageV} storageVV = {storageVV} 
       setRenderApi={setRenderApi} seleccionador={seleccionador}  
       populares={pelisPopulares}  enCartelera={pelisNowPaying}      
       setRankeado={setRankeado} setBtnEliminarListaPropia={setBtnEliminarListaPropia}
-      setSelecStorageBorrar={setSelecStorageBorrar} />
+      setSelecStorageBorrar={setSelecStorageBorrar} 
+      firebasePAV = {firebasePAV} 
+      firebaseV = {firebaseV} firebaseVV = {firebaseVV}
+      />
 
     <SearchPelis setRenderApi={setRenderApi} setBtnEliminarListaPropia = {setBtnEliminarListaPropia}
     seleccionador={seleccionador} onSearchValue={onSearchValue} 
@@ -253,13 +387,23 @@ if (persistencia==='2'){
     listVolverVer={listVolverVer} setVolverVer = {setVolverVer} 
     listAux={listAux} setListAux = {setListAux} 
     listVisto={listVisto} setVisto = {setVisto} 
-    seleccionador = {seleccionador} setStoragePAV = {setStoragePAV}/>
+    seleccionador = {seleccionador} setStoragePAV = {setStoragePAV}
+    listaEnFirebasePAV = {listaEnFirebasePAV}/>
 
-    <ImputOutPutPrueba></ImputOutPutPrueba>   
+  
 
     </div>
 
     <FormAux 
+    cargarFirebaseVV = {cargarFirebaseVV}
+    listaEnFirebaseVV = {listaEnFirebaseVV}
+    firebaseVV = {firebaseVV}
+    listaEnFirebaseV = {listaEnFirebaseV}
+    cargarFirebaseV = {cargarFirebaseV} firebaseV = {firebaseV}
+    borrarDocumentoEnFirebase = {borrarDocumentoEnFirebase}
+    listaEnFirebasePAV = {listaEnFirebasePAV}
+    firebasePAV = {firebasePAV} cargarFirebasePAV = {cargarFirebasePAV}
+    colectionName = {colectionName} 
     cargarStorageVV = {cargarStorageVV}
     cargarStorageV = {cargarStorageV}
     selecStorageBorrar = {selecStorageBorrar}
