@@ -303,16 +303,6 @@ async function listaEnFirebaseVV(){////////////////////extraccion y cargado de s
   
 } 
 
-if (persistencia==='3'){
-  // cargar storage state
-  
-  if (listaEnFirebasePAV){
-    //console.log(firebasePAV);  
-  }
-
-}
-//
-
 
 //////////////////////////////////crear listas en storage si no existen:
 let listaEnStoragePAV = JSON.parse(localStorage.getItem('listaPAV_V4'));
