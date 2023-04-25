@@ -2,12 +2,8 @@ import React from "react";
 import './ApiList.css'
 
 function ApiList (props){
-    //console.log(props)
-    //props.setPeliAGuardar () <= aca dentro va un objeto x.title x.url x.overview x.id
 
     const URL_IMAGE = "https://image.tmdb.org/t/p/original";
-    //console.log('en api');
-    //console.log(props.pelis);
     
     return(
         <React.Fragment>
@@ -31,10 +27,9 @@ function ApiList (props){
 
                     </div>                    
                     <h4 className="text-center">
-                        <span onClick={ () => {//console.log('1');
+                        <span onClick={ () => {
                                     props.setRanking(0)
                                     props.setFormAux(true);
-                                    //console.log(peli.url);
                                     
                                     if(props.renderApi) { peli.url=`${URL_IMAGE + peli.poster_path}`}///////// 
                                     props.setPeliAGuardar (peli);

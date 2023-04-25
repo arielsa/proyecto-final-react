@@ -186,10 +186,9 @@ function App() {
     const docRef = await db.collection('firebasePAV').add({
       message: objeto,
       timestamp: new Date(),
-    });
-    //console.log('Nueva peli cargada con ID:', docRef.id);    
+    });    
   } catch (error) {
-    //console.error('Error al agregar peli:', error);
+    console.error('Error al agregar peli:', error);
   }
 };
 async function cargarFirebaseV(objeto) { //////////////envio  
@@ -197,10 +196,9 @@ async function cargarFirebaseV(objeto) { //////////////envio
     const docRef = await db.collection('firebaseV').add({
       message: objeto,
       timestamp: new Date(),
-    });
-    console.log('Nueva peli cargada con ID:', docRef.id);    
+    });    
   } catch (error) {
-    //console.error('Error al agregar peli:', error);
+    console.error('Error al agregar peli:', error);
   }
 };
 async function cargarFirebaseVV(objeto) { //////////////envio  
@@ -208,10 +206,9 @@ async function cargarFirebaseVV(objeto) { //////////////envio
     const docRef = await db.collection('firebaseVV').add({
       message: objeto,
       timestamp: new Date(),
-    });
-    console.log('Nueva peli cargada con ID:', docRef.id);    
+    });    
   } catch (error) {
-    //console.error('Error al agregar peli:', error);
+    console.error('Error al agregar peli:', error);
   }
 };
 /////////////////////////////////////////eliminar documento de firebase
@@ -219,7 +216,6 @@ async function borrarDocumentoEnFirebase(id,colectionName ) {
   try {
     const docRef = db.collection(colectionName).doc(id);
     await docRef.delete();
-    //console.log('Documento eliminado exitosamente');
   } catch (error) {
     console.error('Error al eliminar documento:', error);
   }
@@ -229,7 +225,6 @@ async function borrarDocumentoEnFirebase(id,colectionName ) {
 
 async function listaEnFirebasePAV(){////////////////////extraccion y cargado de state
   try{
-    //console.log('pedido a firebase');
     const snapshot = await db.collection('firebasePAV').get();
     let fetchedData = [];
     snapshot.forEach((doc) => {
@@ -240,13 +235,10 @@ async function listaEnFirebasePAV(){////////////////////extraccion y cargado de 
         ranking : docData.ranking,
         url : docData.url,
         title : docData.title,
-        //docIde : doc.id
       };
       fetchedData.push(docObjet);
     });
   let fetchedDataString = JSON.stringify(fetchedData)
-   //console.log( fetchedDataString);  
-   //console.log(fetchedData);
   setFirebasePAV(fetchedData);
     
   }catch(error){console.error('Error al recuperar documentos:', error);}
@@ -254,7 +246,6 @@ async function listaEnFirebasePAV(){////////////////////extraccion y cargado de 
 } 
 async function listaEnFirebaseV(){////////////////////extraccion y cargado de state
   try{
-    //console.log('pedido a firebase');
     const snapshot = await db.collection('firebaseV').get();
     let fetchedData = [];
     snapshot.forEach((doc) => {
@@ -270,8 +261,6 @@ async function listaEnFirebaseV(){////////////////////extraccion y cargado de st
       fetchedData.push(docObjet);
     });
   let fetchedDataString = JSON.stringify(fetchedData)
-   //console.log( fetchedDataString);  
-   //console.log(fetchedData);
   setFirebaseV(fetchedData);
     
   }catch(error){console.error('Error al recuperar documentos:', error);}
@@ -279,7 +268,6 @@ async function listaEnFirebaseV(){////////////////////extraccion y cargado de st
 } 
 async function listaEnFirebaseVV(){////////////////////extraccion y cargado de state
   try{
-    //console.log('pedido a firebase');
     const snapshot = await db.collection('firebaseVV').get();
     let fetchedData = [];
     snapshot.forEach((doc) => {
@@ -295,8 +283,6 @@ async function listaEnFirebaseVV(){////////////////////extraccion y cargado de s
       fetchedData.push(docObjet);
     });
   let fetchedDataString = JSON.stringify(fetchedData)
-   //console.log( fetchedDataString);  
-   //console.log(fetchedData);
   setFirebaseVV(fetchedData);
     
   }catch(error){console.error('Error al recuperar documentos:', error);}
@@ -318,12 +304,10 @@ if (persistencia==='2'){
   
   }
   if (!listaEnStorageV){
-    localStorage.setItem('listaV_V4','[]')      
-    //console.log('camibio de lista a storage ');
+    localStorage.setItem('listaV_V4','[]')
   } 
   if (!listaEnStorageVV){
-    localStorage.setItem('listaVV_V4','[]')      
-    //console.log('camibio de lista a storage ');
+    localStorage.setItem('listaVV_V4','[]')
   } 
 }
 ////////////////////////////renderizar api o no.

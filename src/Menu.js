@@ -4,8 +4,6 @@ import './Menu.css'
 function Menu2 (props){
 
     function selecionPopulares(){
-        //console.log('pelis populares');
-       // console.log(props.populares);
         props.setRenderApi(true);
         props.seleccionador(props.populares)
         props.setBtnEliminarListaPropia(false)
@@ -15,8 +13,6 @@ function Menu2 (props){
 
 
     function selecionEnCartelera(){
-        //console.log('pelis populares');
-       // console.log(props.populares)
         props.setRenderApi(true);
         props.seleccionador(props.enCartelera)
         props.setBtnEliminarListaPropia(false)
@@ -29,16 +25,12 @@ function Menu2 (props){
             case '1':
                 props.seleccionador(props.listAux);
                 break;
-            case '2':
-                //console.log(props.listAux); 
-                //props.seleccionador(props.listAux );               
-                props.seleccionador(props.storagePAV );/// solo para el cambio de vista
-                //console.log(' lista1:  ' + props.storagePAV);
+            case '2':              
+                props.seleccionador(props.storagePAV );
                 props.setSelecStorageBorrar('listaPAV_V4');                
                 break;
             case '3':                             
-                props.seleccionador(props.firebasePAV);/// solo para el cambio de vista                
-                //props.setSelecStorageBorrar('listaPAV_V4');
+                props.seleccionador(props.firebasePAV);
                 props.setColectionName('firebasePAV');                
                 break;
         
@@ -59,8 +51,7 @@ function Menu2 (props){
                 props.seleccionador(props.listVolverVer);
                 break;
             case '2':                
-                props.seleccionador(props.storageVV );/// solo para el cambio de vista
-                //console.log(' lista1:  ' + props.storageVV);
+                props.seleccionador(props.storageVV );
                 props.setSelecStorageBorrar('listaVV_V4');                
                 break;
             case '3':                             
@@ -72,7 +63,6 @@ function Menu2 (props){
             default:
                 break;
         }
-        //console.log(props.listVolverVer);
         props.setRankeado(true);
         props.setBtnEliminarListaPropia(true)
         
@@ -86,20 +76,17 @@ function Menu2 (props){
                 props.seleccionador(props.listVisto);
                 break;
             case '2':                
-                props.seleccionador(props.storageV);/// solo para el cambio de vista
-               // console.log(' lista1:  ' + props.storageV);
+                props.seleccionador(props.storageV);
                 props.setSelecStorageBorrar('listaV_V4');                
                 break;
             case '3':                             
-                props.seleccionador(props.firebaseV);/// solo para el cambio de vista                
-                //props.setSelecStorageBorrar('listaPAV_V4');
+                props.seleccionador(props.firebaseV);
                 props.setColectionName('firebaseV');                
                 break;
         
             default:
                 break;
-        }
-        //console.log(props.listVisto);// camibar
+        }        
         props.setRankeado(true);// si
         props.setBtnEliminarListaPropia(true)//si
         

@@ -4,15 +4,12 @@ import { Ranqueador } from './Ranqueador';
 import { useState } from 'react';
 
 function FormAux(props){
-    //props.renderApi (es true en mis listas personales)
-    //props.formAux
     const selecStorageBorrar = props.selecStorageBorrar
     const[mensajePeliRepetida, setMensajePeliRepetida  ]  = useState('')
     let title = props.peliAGuardar.title;
     let id = props.peliAGuardar.id;
     let url= props.peliAGuardar.url
     ////////////////////////////
-    //console.log(url);
     let overview=props.peliAGuardar.overview;
 
     const peliMarcada={
@@ -31,7 +28,7 @@ function FormAux(props){
         props.setFormAux(false)        
     }
 
-     const seleccionProxima = () => {
+    const seleccionProxima = () => {
         setVisto(false) 
         let permitirCarga; 
         setMensajePeliRepetida('')
@@ -39,33 +36,30 @@ function FormAux(props){
             case '1':
                 if (props.listAux.length>0){                    
                     props.filtroDeIntroduccion(peliMarcada,props.listAux) ? permitirCarga= false : permitirCarga = true ;
-                    //console.log(permitirCarga);
+                
                     if (permitirCarga){
                         props.CargarListAux(peliMarcada)
                         setVisto(false)
                         props.setFormAux(false) 
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                        //console.log('no puede ingresar objeto al array');
                     }
                 }else {
                     props.CargarListAux(peliMarcada)
                     setVisto(false)
                     props.setFormAux(false)    
-                }       
-                //console.log(peliMarcada.url);                
+                }                 
                 break;
             case '2':
                 if (props.storagePAV.length>0){                    
                     props.filtroDeIntroduccion(peliMarcada,props.storagePAV) ? permitirCarga= false : permitirCarga = true ;
-                    //console.log(permitirCarga);
+                    
                     if (permitirCarga){
                         props.cargarStoragePAV(peliMarcada)
                         setVisto(false)
                         props.setFormAux(false) 
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                        //console.log('no puede ingresar objeto al array');
                     }
                 }else {
                     props.cargarStoragePAV(peliMarcada)
@@ -74,13 +68,10 @@ function FormAux(props){
                 } 
 
                 break;
-             case '3':
-                //console.log('array: ' + props.firebasePAV );
-                //console.log('tipo: ' + typeof props.firebasePAV );
-                //console.log('tamaño: ' + props.firebasePAV.length );
+            case '3':
                 if (props.firebasePAV.length>0){                    
                     props.filtroDeIntroduccion(peliMarcada,props.firebasePAV) ? permitirCarga= false : permitirCarga = true ;
-                    //console.log(permitirCarga);
+                
                     if (permitirCarga){
                         props.cargarFirebasePAV(peliMarcada)// funcion que agregue objeto
                         props.listaEnFirebasePAV(); 
@@ -88,7 +79,6 @@ function FormAux(props){
                         props.setFormAux(false) 
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                        //console.log('no puede ingresar objeto al array');
                     }
                 }else {
                     props.cargarFirebasePAV(peliMarcada)
@@ -108,6 +98,7 @@ function FormAux(props){
         const [listRankeadaGuardar, setListRankeadaGuardar] = React.useState('')
 
     const seleccionVolverVer = () =>{
+        setVisto(false)
         setMensajePeliRepetida('')
         setListRankeadaGuardar('volverVer')
         let permitirCarga;
@@ -120,7 +111,6 @@ function FormAux(props){
                         setVisto(true)                               
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                        //console.log('no puede ingresar objeto al array');
                     }
                 }
                 else{
@@ -130,12 +120,12 @@ function FormAux(props){
             case '2':
                 if (props.storageVV.length>0){                    
                     props.filtroDeIntroduccion(peliMarcada,props.storageVV) ? permitirCarga= false : permitirCarga = true ;
-                    //console.log(permitirCarga);
+                    
                     if (permitirCarga){
                         setVisto(true) 
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                        //console.log('no puede ingresar objeto al array');
+                    
                     }
                 }else {
                     setVisto(true)    
@@ -144,12 +134,11 @@ function FormAux(props){
                 case '3':
                     if (props.firebaseVV.length>0){                    
                         props.filtroDeIntroduccion(peliMarcada,props.firebaseVV) ? permitirCarga= false : permitirCarga = true ;
-                        //console.log(permitirCarga);
+                        
                         if (permitirCarga){
                             setVisto(true) 
                         } else{
                             setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                            //console.log('no puede ingresar objeto al array');
                         }
                     }else {
                         setVisto(true)    
@@ -177,14 +166,12 @@ function FormAux(props){
         default:
             break;
     }
-    
-        //console.log(props.ranking + 'ranking' ); 
-        //console.log(peliMarcada);
         props.setFormAux(false)
         setVisto(false) //cierro el rankeador       
     }
 
     const seleccionVisto = () =>{
+        setVisto(false)
         setMensajePeliRepetida('')
         setListRankeadaGuardar('visto')
         let permitirCarga;
@@ -197,7 +184,6 @@ function FormAux(props){
                         setVisto(true)                               
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                        //console.log('no puede ingresar objeto al array');
                     }
                 }
                 else{
@@ -205,32 +191,26 @@ function FormAux(props){
                 } 
                 break;
             case '2':
-                if (props.storageV.length>0){ 
-                    //console.log('pelisselecionadas: ');
-                    //console.log(props.pelisSeleccionadas);                   
+                if (props.storageV.length>0){                 
                     props.filtroDeIntroduccion(peliMarcada,props.storageV) ? permitirCarga= false : permitirCarga = true ;
-                    //console.log(permitirCarga);
+                
                     if (permitirCarga){
                         setVisto(true) 
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                        //console.log('no puede ingresar objeto al array');
                     }
                 }else {
                     setVisto(true)    
                 } 
                 break;
             case '3': 
-                if (props.firebaseV.length>0){ 
-                    //console.log('pelisselecionadas: ');
-                    //console.log(props.pelisSeleccionadas);                   
+                if (props.firebaseV.length>0){                
                     props.filtroDeIntroduccion(peliMarcada,props.firebaseV) ? permitirCarga= false : permitirCarga = true ;
-                    //console.log(permitirCarga);
+                
                     if (permitirCarga){
                         setVisto(true) 
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
-                        //console.log('no puede ingresar objeto al array');
                     }
                 }else {
                     setVisto(true)    
@@ -245,13 +225,9 @@ function FormAux(props){
     const guardarSeleccionVisto= ()=>{ // se guarda con el boton guardar del rankeador
         switch (props.persistencia) {
             case '1':
-                //console.log('pelisselecionadas: ');
-                //console.log(props.pelisSeleccionadas);
                 props.CargarListVisto(peliMarcada)
                 break;
             case '2':
-                //console.log('pelisselecionadas: ');
-                //console.log(props.pelisSeleccionadas);
                 props.cargarStorageV(peliMarcada)  
                 break;
             case '3':
@@ -265,14 +241,11 @@ function FormAux(props){
         props.setFormAux(false)       
     }
 
-    const eliminar = ()=>{
-        //console.log('pelisselecionadas: ');
-        //console.log(props.pelisSeleccionadas);
+     const eliminar = ()=>{
 
         let indiceObjetoBorrar = props.pelisSeleccionadas.findIndex(function(objeto) {
             return objeto.id === peliMarcada.id 
         });
-        //console.log(indiceObjetoBorrar);
         props.pelisSeleccionadas.splice(indiceObjetoBorrar,1);
         
         if(props.persistencia==='2')
@@ -288,12 +261,10 @@ function FormAux(props){
         }
         if (props.persistencia==='3')
         {
-            //console.log(props.peliAGuardar.id);
             props.borrarDocumentoEnFirebase(props.peliAGuardar.id, props.colectionName);
-            //eliminarDocumento()
         }
-
-
+        setVisto(false)
+        setMensajePeliRepetida('')
         props.setFormAux(false)       
     }
     
@@ -311,7 +282,7 @@ function FormAux(props){
                         <div>
                             <span onClick={seleccionVisto} >visto |</span>
                             <span onClick={seleccionVolverVer} > volver a ver |</span>
-                             <span onClick={seleccionProxima } > proxima a ver</span>
+                            <span onClick={seleccionProxima } > proxima a ver</span>
                             <div className='poster-cont'>
                                 <h4 className="mensajePeliRepetida">{mensajePeliRepetida}</h4>
                             </div>

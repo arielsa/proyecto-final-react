@@ -1,15 +1,11 @@
 import React from "react";
 import './SeleccionDeCarga.css';
 
-function SeleccionDeCarga (props){
-
-    
-    //props.persistencia y props.setPersistencia
+function SeleccionDeCarga (props){  
 
     function listarConDetalle (){
         props.SelecionarModoDeVista('con-detalle')
     }
-
 
     function listarSinDetalle (){
         props.SelecionarModoDeVista('sin-detalle')
@@ -20,7 +16,6 @@ function SeleccionDeCarga (props){
         if (props.persistencia === '1' && primerCarga == 1 ){
             valorDefecto = true
             primerCarga = 0
-            //console.log('valor por defecto: '+ valorDefecto + ' primercarga: '+ primerCarga );
         }
         
     }
@@ -28,30 +23,23 @@ function SeleccionDeCarga (props){
     let valorDefecto;
     porDefecto();
 
-    function tipoDePersistencia (e){// la persistencia cambia al salir de la funcion       
-        //e.preventDefault() 
-        props.setPersistencia(e.target.value); /////// cambia la persistencia
-        //console.log('persistencia elegida ' + props.persistencia );
+    function tipoDePersistencia (e){
+        props.setPersistencia(e.target.value);
         switch (e.target.value) {
             case '1':                
-                props.setListAux([]);// vacio
+                props.setListAux([]);
                 props.seleccionador([])
                 props.setVisto([]);
                 props.setVolverVer([]);
             break;
             case '2':                
                 props.setListAux(props.listaEnStoragePAV);
-                //console.log(props.listAux);
                 props.setVisto(props.listaEnStorageV)
                 props.setVolverVer(props.listaEnStorageVV) 
-                props.seleccionador([]);/// solo para el cambio de vista
-                //console.log(' lista1:  ' + props.storagePAV);                
+                props.seleccionador([]);               
                 break;
 
-            case '3':
-                //props.setListAux(props.listaEnStoragePAV);
-                //props.setVisto(props.listaEnStorageV)
-                //console.log(props.inFireBase) 
+            case '3': 
                 props.seleccionador([]);/// solo para el cambio de vista
                                 
                 break;
@@ -78,7 +66,6 @@ function SeleccionDeCarga (props){
                 <label htmlFor='local' >LocalStorage</label>
                 <input type="radio" name="modo-guardado" value= '3' id="fire" onChange={e=>tipoDePersistencia(e)} />
                 <label htmlFor='fire' >FireBase</label>
-                {/*<span className="m-1 icono-seleccionador" onClick={activacionDePersistencia}>actualizar</span>*/}
             </h6>
             <h6>
             
