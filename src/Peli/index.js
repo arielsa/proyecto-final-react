@@ -1,6 +1,6 @@
 import React from  'react'
 import './Peli.css'
-import {Ranqueador} from './Ranqueador.js'
+//import {Ranqueador} from './Ranqueador.js'
 
 const urlImage = 'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71niXI3lxlL._SY679_.jpg';
 
@@ -53,7 +53,6 @@ function Peli (props){
                                     props.setFormAux(true);                                  
                                 } }  > <i className="fas fa-window-restore icon  "></i></span></h2>
                             </div>
-                            {/* <Ranqueador/> */}
                             
                         </div>  
                                                     

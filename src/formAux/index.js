@@ -1,6 +1,6 @@
 import React from 'react'
 import './FormAux.css'
-import { Ranqueador } from './Ranqueador';
+import { Ranqueador } from '../Ranqueador';
 import { useState } from 'react';
 
 function FormAux(props){

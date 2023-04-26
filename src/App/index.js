@@ -4,16 +4,16 @@ import React from 'react';
 import axios from 'axios';
 import db from '../config/firebase';
 
-///////////importacion de componentes
+///////////importacion de componentes 
 import './App.css';
-import { Menu2 } from '../Menu.js';
-import { SearchPelis } from '../SearchPelis.js'; 
-import { PelisListDetalle } from '../PelisListDetalle.js';
-import {Peli} from '../Peli.js';
-import { ApiList } from '../ApiList.js';
-import {SeleccionDeCarga} from '../SeleccionDeCarga.js'
-import { EstadoDeBusqueda } from '../EstadoDeBusqueda.js';
-import { FormAux } from '../FormAux.js';
+import { Menu2 } from '../Menu';
+import { SearchPelis } from '../SearchPelis'; 
+import { PelisListDetalle } from '../PelisListDetalle';
+import {Peli} from '../Peli';
+import { ApiList } from '../ApiList';
+import {SeleccionDeCarga} from '../SeleccionDeCarga'
+import { EstadoDeBusqueda } from './EstadoDeBusqueda';
+import { FormAux } from '../formAux';
 
 
 const API_URL = "https://api.themoviedb.org/3";
