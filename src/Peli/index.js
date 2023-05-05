@@ -43,8 +43,12 @@ function Peli (props){
                                     ></i>
                                 ))}
                             </div> 
-
+                            <h5>RESEÑA</h5>
                             <p className="text-center" >{props.overview}</p>
+                              
+                            <h5 className={props.coment === ''|| props.coment === undefined ? 'inactive' : ''} >COMENTARIO</h5>
+                            <p className={/*props.coment === ''? 'inactive' :*/ ''} >{props.coment}</p>
+                            
 
                             <div>
                                 <h2><span onClick={ () => {

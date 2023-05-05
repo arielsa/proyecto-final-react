@@ -102,7 +102,7 @@ function App() {
 
   ////////////////seleccionador de modo de visualizacion, con detalle, lista propia, ranqueador
   const [modoDeLista, setModoDeListado]= useState('sin-detalle');
-  const [rankeado, setRankeado] = useState('false');
+   const [rankeado, setRankeado] = useState('false');
   const [btnEliminarListaPropia, setBtnEliminarListaPropia] = useState('false'); 
   const [persistencia, setPersistencia] = useState('1');//1 volatil, 2 localStorage, 3 fireBase.
 
@@ -115,6 +115,7 @@ function App() {
   const [formAux, setFormAux]=useState(false)///prender/apagar <<<<modal
   const [peliAGuardar, setPeliAGuardar] = useState([])
   const [ranking, setRanking] = useState ();//guardar ranking
+  const [coment, setComent] = useState('')
   //listasvolatiles
   const [listAux,setListAux] = useState([]);////lista proxima a ver
   const [listVolverVer, setVolverVer] = useState([]);
@@ -256,7 +257,8 @@ async function listaEnFirebaseV(){////////////////////extraccion y cargado de st
         ranking : docData.ranking,
         url : docData.url,
         title : docData.title,
-        ranking : docData.ranking, 
+         ranking : docData.ranking,         
+        coment : docData.coment, 
       };
       fetchedData.push(docObjet);
     });
@@ -278,7 +280,7 @@ async function listaEnFirebaseVV(){////////////////////extraccion y cargado de s
         ranking : docData.ranking,
         url : docData.url,
         title : docData.title,
-        ranking : docData.ranking, 
+         ranking : docData.ranking, 
       };
       fetchedData.push(docObjet);
     });
@@ -369,6 +371,7 @@ if (persistencia==='2'){
     </div>
 
     <FormAux 
+    coment={coment} setComent={setComent}
     cargarFirebaseVV = {cargarFirebaseVV}
     listaEnFirebaseVV = {listaEnFirebaseVV}
     firebaseVV = {firebaseVV}
@@ -401,7 +404,8 @@ if (persistencia==='2'){
         {pelisSeleccionadas.map (peli =>
           (<Peli setFormAux={setFormAux} setRanking={setRanking}  
             setPeliAGuardar={setPeliAGuardar} key={peli.id} rankeado={rankeado}
-            id={peli.id} title={peli.title} ranking = {peli.ranking}
+            id={peli.id} title={peli.title} ranking = {peli.ranking} 
+            coment = {peli.coment} setComent = {setComent}
             url={ renderApi ? `${URL_IMAGE + peli.poster_path}`: peli.url } 
             overview={peli.overview}/>))
         }

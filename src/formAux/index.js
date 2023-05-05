@@ -12,23 +12,35 @@ function FormAux(props){
     ////////////////////////////
     let overview=props.peliAGuardar.overview;
 
+     const [listar, setListar] = useState (false)
+     const [comentar,setComentar] = useState(false)
+     const [textAreaValue, setTextAreaValue] = useState('');
+     
+
     const peliMarcada={
         title: props.peliAGuardar.title,
         id : props.peliAGuardar.id,
         url: props.peliAGuardar.url,
         overview : props.peliAGuardar.overview,
         ranking: props.ranking,
+        coment:props.coment,
     }
 
     const[visto,setVisto]=useState(false)
 
     const cerrarModal= ()=>{
         setMensajePeliRepetida('')
+        setListar(false)
         setVisto(false)
-        props.setFormAux(false)        
+        props.setFormAux(false)
+        props.setComent('')
+        cerrarComentario()        
     }
 
     const seleccionProxima = () => {
+        //setListar(true)
+        cerrarComentario()
+        props.setComent('')
         setVisto(false) 
         let permitirCarga; 
         setMensajePeliRepetida('')
@@ -98,6 +110,7 @@ function FormAux(props){
         const [listRankeadaGuardar, setListRankeadaGuardar] = React.useState('')
 
     const seleccionVolverVer = () =>{
+        setListar(true)
         setVisto(false)
         setMensajePeliRepetida('')
         setListRankeadaGuardar('volverVer')
@@ -108,13 +121,15 @@ function FormAux(props){
                 {
                     props.filtroDeIntroduccion(peliMarcada,props.listVolverVer) ? permitirCarga= false : permitirCarga = true ;
                     if (permitirCarga){
-                        setVisto(true)                               
+                        setVisto(true)
+                        setListar(false)                               
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }
                 else{
-                    setVisto(true)            
+                    setVisto(true)
+                    setListar(false)            
                 } 
                 break;
             case '2':
@@ -122,13 +137,15 @@ function FormAux(props){
                     props.filtroDeIntroduccion(peliMarcada,props.storageVV) ? permitirCarga= false : permitirCarga = true ;
                     
                     if (permitirCarga){
-                        setVisto(true) 
+                        setVisto(true)
+                         
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
+                        setListar(false)
                     
                     }
                 }else {
-                    setVisto(true)    
+                    setVisto(true)                        
                 } 
                 break;
                 case '3':
@@ -136,12 +153,13 @@ function FormAux(props){
                         props.filtroDeIntroduccion(peliMarcada,props.firebaseVV) ? permitirCarga= false : permitirCarga = true ;
                         
                         if (permitirCarga){
-                            setVisto(true) 
+                            setVisto(true)                             
                         } else{
+                            setListar(false)
                             setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                         }
                     }else {
-                        setVisto(true)    
+                        setVisto(true)                            
                     } 
                     break;
         
@@ -155,6 +173,7 @@ function FormAux(props){
     switch (props.persistencia) {
         case '1':
             props.CargarListVolverVer(peliMarcada)
+            console.log(peliMarcada)
             break;
         case '2':
             props.cargarStorageVV(peliMarcada)  
@@ -167,10 +186,12 @@ function FormAux(props){
             break;
     }
         props.setFormAux(false)
-        setVisto(false) //cierro el rankeador       
+        setVisto(false) //cierro el rankeador
+        setListar(false)       
     }
 
     const seleccionVisto = () =>{
+        setListar(true)
         setVisto(false)
         setMensajePeliRepetida('')
         setListRankeadaGuardar('visto')
@@ -183,6 +204,7 @@ function FormAux(props){
                     if (permitirCarga){
                         setVisto(true)                               
                     } else{
+                        setListar(false)
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }
@@ -195,12 +217,13 @@ function FormAux(props){
                     props.filtroDeIntroduccion(peliMarcada,props.storageV) ? permitirCarga= false : permitirCarga = true ;
                 
                     if (permitirCarga){
-                        setVisto(true) 
+                        setVisto(true)
                     } else{
+                        setListar(false)
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }else {
-                    setVisto(true)    
+                    setVisto(true)  
                 } 
                 break;
             case '3': 
@@ -208,12 +231,13 @@ function FormAux(props){
                     props.filtroDeIntroduccion(peliMarcada,props.firebaseV) ? permitirCarga= false : permitirCarga = true ;
                 
                     if (permitirCarga){
-                        setVisto(true) 
+                        setVisto(true)
                     } else{
+                        setListar(false)
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }else {
-                    setVisto(true)    
+                    setVisto(true)   
                 } 
                 break;
         
@@ -238,11 +262,13 @@ function FormAux(props){
                 break;
         }       
         setVisto(false) //cierro el rankeador
-        props.setFormAux(false)       
+        props.setFormAux(false)
+        setListar(false)       
     }
 
      const eliminar = ()=>{
 
+        setListar(false)
         let indiceObjetoBorrar = props.pelisSeleccionadas.findIndex(function(objeto) {
             return objeto.id === peliMarcada.id 
         });
@@ -267,7 +293,21 @@ function FormAux(props){
         setMensajePeliRepetida('')
         props.setFormAux(false)       
     }
-    
+
+     const crearComentario = () =>{
+        setComentar(true)
+    }
+    const cerrarComentario = () =>{
+        setComentar(false)
+        props.setComent('')
+        setTextAreaValue('')
+    }
+    const guardarComent = () => {
+        props.setComent(textAreaValue)
+        setComentar(false)
+        setTextAreaValue('')
+        console.log(textAreaValue);                       
+    }
     return(
         <React.Fragment>
 
@@ -285,11 +325,22 @@ function FormAux(props){
                             <span onClick={seleccionProxima } > proxima a ver</span>
                             <div className='poster-cont'>
                                 <h4 className="mensajePeliRepetida">{mensajePeliRepetida}</h4>
+                            </div>                            
+                        </div>                
+                    </div>
+                     <div className={ listar ? '' : 'inactive'} >
+                        <span onClick={crearComentario} >comentar/recomentar</span>
+                    </div>
+                     <div className={comentar ? '': 'inactive' } >
+                        <form className={'comentario'}>
+                            <textarea class={"form-control"+''} onChange={(event) => setTextAreaValue(event.target.value)} value={textAreaValue} cols="30" rows="2"></textarea>
+                            <div className='container'>
+                                <divc className="row ">
+                                    <button type="button" onClick={guardarComent} class="btn btn-outline-dark col-6" >guardar</button>
+                                    <button onClick={cerrarComentario} type="button" class="btn btn-outline-danger col-6" >cerrar</button>
+                                </divc>
                             </div>
-                            
-                        </div>
-                        
-                                            
+                        </form>
                     </div>
                     <div className={ visto? '':'inactive'}  >
                         <h4>Ranqueador:</h4>

@@ -60,3 +60,6 @@
 .icon2:hover{
   color: rgb(205, 5, 5);
 }
+.comentario{
+  display: grid;
+}
