@@ -2,4 +2,18 @@ ul {
     margin: 0;
     padding: 0 0 56px 0;
     list-style: none;
+    text-align: -webkit-center;
   }
+
+.margen-forzado{
+  background-color: transparent;
+  height: 150px;
+}
+@media screen and (min-width: 768px) {
+  .margen-forzado{
+    display: none;
+    background-color: antiquewhite;
+    height: 0px;
+  }
+
+}

@@ -13,7 +13,7 @@ function SearchPelis (props){
 
   
     return(    
-        <div className="input-group mb-3 m-2" >
+        <div className="input-group mb-3 m-2 posicionadorSearch" >
             <div className="input-group-prepend">
                 <button className="btn btn-outline-primary" type="button"
                 onClick={trendingClickeado} 

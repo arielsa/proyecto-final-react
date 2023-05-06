@@ -38,7 +38,7 @@ function FormAux(props){
     }
 
     const seleccionProxima = () => {
-        //setListar(true)
+        setListar(false)
         cerrarComentario()
         props.setComent('')
         setVisto(false) 
@@ -54,6 +54,8 @@ function FormAux(props){
                         setVisto(false)
                         props.setFormAux(false) 
                     } else{
+                        setListar(false)
+                        cerrarComentario()
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }else {
@@ -71,6 +73,8 @@ function FormAux(props){
                         setVisto(false)
                         props.setFormAux(false) 
                     } else{
+                        cerrarComentario()
+                        setListar(false)
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }else {
@@ -90,6 +94,8 @@ function FormAux(props){
                         setVisto(false)
                         props.setFormAux(false) 
                     } else{
+                        cerrarComentario()
+                        setListar(false)
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }else {
@@ -121,15 +127,16 @@ function FormAux(props){
                 {
                     props.filtroDeIntroduccion(peliMarcada,props.listVolverVer) ? permitirCarga= false : permitirCarga = true ;
                     if (permitirCarga){
-                        setVisto(true)
-                        setListar(false)                               
+                        setVisto(true)                                                     
                     } else{
+                         setListar(false)  
+                         cerrarComentario()
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }
                 else{
                     setVisto(true)
-                    setListar(false)            
+                                
                 } 
                 break;
             case '2':
@@ -142,6 +149,7 @@ function FormAux(props){
                     } else{
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                         setListar(false)
+                        cerrarComentario()
                     
                     }
                 }else {
@@ -156,6 +164,7 @@ function FormAux(props){
                             setVisto(true)                             
                         } else{
                             setListar(false)
+                            cerrarComentario()
                             setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                         }
                     }else {
@@ -187,7 +196,8 @@ function FormAux(props){
     }
         props.setFormAux(false)
         setVisto(false) //cierro el rankeador
-        setListar(false)       
+        setListar(false) 
+        cerrarComentario()      
     }
 
     const seleccionVisto = () =>{
@@ -204,7 +214,8 @@ function FormAux(props){
                     if (permitirCarga){
                         setVisto(true)                               
                     } else{
-                        setListar(false)
+                        cerrarComentario()
+                         setListar(false)
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }
@@ -220,6 +231,7 @@ function FormAux(props){
                         setVisto(true)
                     } else{
                         setListar(false)
+                        cerrarComentario()
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }else {
@@ -234,6 +246,7 @@ function FormAux(props){
                         setVisto(true)
                     } else{
                         setListar(false)
+                        cerrarComentario()
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }else {
@@ -263,7 +276,8 @@ function FormAux(props){
         }       
         setVisto(false) //cierro el rankeador
         props.setFormAux(false)
-        setListar(false)       
+        setListar(false)
+        cerrarComentario()       
     }
 
      const eliminar = ()=>{

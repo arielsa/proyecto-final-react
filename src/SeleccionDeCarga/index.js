@@ -56,16 +56,27 @@ function SeleccionDeCarga (props){
     return(
         <React.Fragment>
             <h6 className="opciones" >
-                <span className="vista" >modo de vista: </span>
-                <span className="m-1 icono-seleccionador" onClick={listarConDetalle}><i className="fa-solid fa-list"></i></span>
-                <span className="m-1 icono-seleccionador" onClick={listarSinDetalle} ><i className="fas fa-th-large"></i></span>
-                <span className="modo-guardado"  >Persistencia:</span>
-                <input type="radio" name="modo-guardado" value=  '1' id="app" checked={valorDefecto} onChange={e=>tipoDePersistencia(e)} />
-                <label htmlFor='app' >Volatil</label>
-                <input type="radio" name="modo-guardado" value= '2' id="local" onChange={e=>tipoDePersistencia(e)} />
-                <label htmlFor='local' >LocalStorage</label>
-                <input type="radio" name="modo-guardado" value= '3' id="fire" onChange={e=>tipoDePersistencia(e)} />
-                <label htmlFor='fire' >FireBase</label>
+                <div className="container posicionadorCarga ">
+                    <div className="row">
+                        <div className="col-12  col-md-4">
+                            <span className="vista " >Modo de vista: </span>
+                            <span className="m-1 icono-seleccionador" onClick={listarConDetalle}><i className="fa-solid fa-list"> 1</i></span>
+                            <span className="m-1 icono-seleccionador" onClick={listarSinDetalle} ><i className="fas fa-th-large"> 2</i></span>
+                        </div>
+                        <div className="col-12  col-md-8 persistencia" >
+                            <span className="modo-guardado"  >Persistencia:</span>
+                            <input type="radio" name="modo-guardado" value=  '1' id="app" checked={valorDefecto} onChange={e=>tipoDePersistencia(e)} />
+                            <label htmlFor='app' >Volatil</label>
+                            <input type="radio" name="modo-guardado" value= '2' id="local" onChange={e=>tipoDePersistencia(e)} />
+                            <label htmlFor='local' >LocalStorage</label>
+                            <input type="radio" name="modo-guardado" value= '3' id="fire" onChange={e=>tipoDePersistencia(e)} />
+                            <label htmlFor='fire' >FireBase</label>
+                        </div>
+
+                    </div>
+                </div>
+
+
             </h6>
             <h6>
             

@@ -9,7 +9,7 @@
 
 }
 
-.icono-seleccionador {
+.icono-seleccionador{
     color: var(--colorAcentos);
 }
 
@@ -18,7 +18,6 @@
 }
 
 span.modo-guardado{
-    margin-left: 15px;
     text-decoration: none;
     color: black;
     cursor: auto;
@@ -53,4 +52,19 @@ input[type='radio']:checked + label {
     border-radius:  6px;
     border: #454655 solid 2px;
     color: var(--colorAlerta2)
+}
+
+.posicionadorCarga{
+    position:absolute;
+    margin-top: 90px;
+}
+
+@media screen and (min-width: 768px) {
+    .opciones .persistencia{        
+        text-align: right;
+    }
+    .posicionadorCarga{
+        position:relative;
+        margin-top: 0px;
+    }
 }

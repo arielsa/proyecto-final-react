@@ -21,11 +21,9 @@ function Peli (props){
 
     return(    
     <React.Fragment>
-
-
         
         <li>
-            <div className="container card m-3 m-lg-5">
+            <div className="container card m-3 m-lg-5 pisicionador-peli">
                 <div className="row m-3">                    
                         <div className="col-md-6 poster-cont">
                             <img className="poster" src={props.url}/>{/*  URLImage+"/"props.poster_path  */ }

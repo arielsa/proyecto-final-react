@@ -22,6 +22,8 @@ img.poster{
 .card{
     background-color: var(--colorSecundario) ;
     border: solid var(--colorAcentos) ;
+    position: absolute;
+    margin-top: 80px;
 }
 .icon{
     color: var(--colorAcentoDark);
@@ -37,4 +39,9 @@ img.poster{
     color: var(--coloreSubdominate);
     font-size: 150%;
     cursor: auto;
+}
+
+.pisicionador-peli{
+    margin-top: 80px;
+    position: relative;
 }

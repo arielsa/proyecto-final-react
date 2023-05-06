@@ -8,7 +8,7 @@ function ApiList (props){
     return(
         <React.Fragment>
             <div className={"container mt-3 opcion2 " + props.visibilidad }>
-                <div className="row ">
+                <div className="row poster-solo " >
                 {props.pelis.map((peli) => (
 
                     <div
