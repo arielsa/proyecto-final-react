@@ -66,6 +66,9 @@ text-align: center;
     color:var(--colorAcentoDark)
     
 }
+.poster-modal{
+    height:70% ;
+}
 
 @media screen and (min-width: 768px) {
     .menu-chico{

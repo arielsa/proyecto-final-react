@@ -15,6 +15,7 @@ function FormAux(props){
      const [listar, setListar] = useState (false)
      const [comentar,setComentar] = useState(false)
      const [textAreaValue, setTextAreaValue] = useState('');
+     const [listSelection, setListSelection] = useState(0)
      
 
     const peliMarcada={
@@ -34,11 +35,13 @@ function FormAux(props){
         setVisto(false)
         props.setFormAux(false)
         props.setComent('')
-        cerrarComentario()        
+        cerrarComentario()  
+        setListSelection(0)      
     }
 
     const seleccionProxima = () => {
         setListar(false)
+        setListSelection(3)
         cerrarComentario()
         props.setComent('')
         setVisto(false) 
@@ -51,15 +54,17 @@ function FormAux(props){
                 
                     if (permitirCarga){
                         props.CargarListAux(peliMarcada)
+                        setListSelection(0)
                         setVisto(false)
                         props.setFormAux(false) 
                     } else{
                         setListar(false)
-                        cerrarComentario()
+                        cerrarComentario()                        
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }else {
                     props.CargarListAux(peliMarcada)
+                    setListSelection(0)
                     setVisto(false)
                     props.setFormAux(false)    
                 }                 
@@ -70,6 +75,7 @@ function FormAux(props){
                     
                     if (permitirCarga){
                         props.cargarStoragePAV(peliMarcada)
+                        setListSelection(0)
                         setVisto(false)
                         props.setFormAux(false) 
                     } else{
@@ -80,7 +86,8 @@ function FormAux(props){
                 }else {
                     props.cargarStoragePAV(peliMarcada)
                     setVisto(false)
-                    props.setFormAux(false)    
+                    props.setFormAux(false)
+                    setListSelection(0)    
                 } 
 
                 break;
@@ -90,7 +97,8 @@ function FormAux(props){
                 
                     if (permitirCarga){
                         props.cargarFirebasePAV(peliMarcada)// funcion que agregue objeto
-                        props.listaEnFirebasePAV(); 
+                        props.listaEnFirebasePAV();
+                        setListSelection(0) 
                         setVisto(false)
                         props.setFormAux(false) 
                     } else{
@@ -101,6 +109,7 @@ function FormAux(props){
                 }else {
                     props.cargarFirebasePAV(peliMarcada)
                     setVisto(false)
+                    setListSelection(0)
                     props.setFormAux(false)    
                 } 
                 break;
@@ -117,6 +126,7 @@ function FormAux(props){
 
     const seleccionVolverVer = () =>{
         setListar(true)
+        setListSelection(2)
         setVisto(false)
         setMensajePeliRepetida('')
         setListRankeadaGuardar('volverVer')
@@ -197,10 +207,12 @@ function FormAux(props){
         props.setFormAux(false)
         setVisto(false) //cierro el rankeador
         setListar(false) 
-        cerrarComentario()      
+        cerrarComentario()
+        setListSelection(0)      
     }
 
     const seleccionVisto = () =>{
+        setListSelection(1)
         setListar(true)
         setVisto(false)
         setMensajePeliRepetida('')
@@ -215,7 +227,7 @@ function FormAux(props){
                         setVisto(true)                               
                     } else{
                         cerrarComentario()
-                         setListar(false)
+                        setListar(false)
                         setMensajePeliRepetida('Esta peli ya esta en la lista seleccionada')
                     }
                 }
@@ -260,6 +272,7 @@ function FormAux(props){
     }
 
     const guardarSeleccionVisto= ()=>{ // se guarda con el boton guardar del rankeador
+        
         switch (props.persistencia) {
             case '1':
                 props.CargarListVisto(peliMarcada)
@@ -277,7 +290,8 @@ function FormAux(props){
         setVisto(false) //cierro el rankeador
         props.setFormAux(false)
         setListar(false)
-        cerrarComentario()       
+        cerrarComentario()
+        setListSelection(0)               
     }
 
      const eliminar = ()=>{
@@ -305,7 +319,8 @@ function FormAux(props){
         }
         setVisto(false)
         setMensajePeliRepetida('')
-        props.setFormAux(false)       
+        props.setFormAux(false)
+        setListSelection(0)       
     }
 
      const crearComentario = () =>{
@@ -328,52 +343,52 @@ function FormAux(props){
             <div className={'container '+ ( !props.formAux? ' inactive' :'' ) }>
                 <div className= ' row ModalBackground'>
                     <div className="card poster-cont ">
-                    <div className='mt-3'>
-                    <img src={url}  /> 
-                    </div>
-                    <div className='poster-cont '>
-                        <h4 className='align-text-center'>Guardar en lista : {title}</h4>
-                        <div>
-                            <span onClick={seleccionVisto} >visto |</span>
-                            <span onClick={seleccionVolverVer} > volver a ver |</span>
-                            <span onClick={seleccionProxima } > proxima a ver</span>
-                            <div className='poster-cont'>
-                                <h4 className="mensajePeliRepetida">{mensajePeliRepetida}</h4>
-                            </div>                            
-                        </div>                
-                    </div>
-                     <div className={ listar ? '' : 'inactive'} >
-                        <span onClick={crearComentario} >comentar/recomentar</span>
-                    </div>
-                     <div className={comentar ? '': 'inactive' } >
-                        <form className={'comentario'}>
-                            <textarea class={"form-control"+''} onChange={(event) => setTextAreaValue(event.target.value)} value={textAreaValue} cols="30" rows="2"></textarea>
-                            <div className='container'>
-                                <divc className="row ">
-                                    <button type="button" onClick={guardarComent} class="btn btn-outline-dark col-6" >guardar</button>
-                                    <button onClick={cerrarComentario} type="button" class="btn btn-outline-danger col-6" >cerrar</button>
-                                </divc>
-                            </div>
-                        </form>
-                    </div>
-                    <div className={ visto? '':'inactive'}  >
-                        <h4>Ranqueador:</h4>
-                        <Ranqueador 
-                        listRankeadaGuardar={listRankeadaGuardar}
-                        guardarSeleccionVisto={guardarSeleccionVisto}
-                        guardarSeleccionVolverVer={guardarSeleccionVolverVer}
-                        ranking={props.ranking} setRanking={props.setRanking}/>
-                    </div>
-                    <h2 className='modal-opciones-inferiores' >
-                        <span  className='opcion-modal' onClick={  cerrarModal } > 
-                            <i  id='cerrar' className="fas fa-window-restore  "></i>
-                            <label htmlFor='cerrar'  className='modal-label' >Cerrar</label>
-                        </span>
-                        <span onClick={eliminar} className= {props.btnEliminarListaPropia ? 'opcion-modal icon2' : 'opcion-modal icon2 inactive' }  >                            
-                            <i id='eliminar'  className="fa-solid fa-circle-xmark  "></i>
-                            <label htmlFor='eliminar'  className='modal-label '  >Eliminar</label>                            
-                        </span>
-                    </h2>
+                        <div className='mt-3 poster-modal-cont'>
+                        <img src={url} className='poster-peque'/> 
+                        </div>
+                        <div className='poster-cont '>
+                            <h4 className='align-text-center'>Guardar en lista : {title}</h4>
+                            <div>
+                                 <span onClick={seleccionVisto} className={`${listSelection === 1 ? 'list-seleccion-form' : ''}`} >visto |</span>
+                                <span onClick={seleccionVolverVer} className={`${listSelection === 2 ? 'list-seleccion-form' : ''}`}  > volver a ver |</span>
+                                <span onClick={seleccionProxima }  className={`${listSelection === 3 ? 'list-seleccion-form' : ''}`} > proxima a ver</span>
+                                <div className='poster-cont'>
+                                    <h4 className="mensajePeliRepetida">{mensajePeliRepetida}</h4>
+                                </div>                            
+                            </div>                
+                        </div>
+                        <div className={ listar ? '' : 'inactive'} >
+                            <span onClick={crearComentario} >comentar/recomentar</span>
+                        </div>
+                        <div className={comentar ? '': 'inactive' } >
+                            <form className={'comentario'}>
+                                <textarea class={"form-control"+''} onChange={(event) => setTextAreaValue(event.target.value)} value={textAreaValue} cols="30" rows="2"></textarea>
+                                <div className='container'>
+                                    <divc className="row ">
+                                        <button type="button" onClick={guardarComent} class="btn btn-outline-dark col-6" >guardar</button>
+                                        <button onClick={cerrarComentario} type="button" class="btn btn-outline-danger col-6" >cerrar</button>
+                                    </divc>
+                                </div>
+                            </form>
+                        </div>
+                        <div className={ visto? '':'inactive'}  >
+                            <h4>Ranqueador:</h4>
+                            <Ranqueador 
+                            listRankeadaGuardar={listRankeadaGuardar}
+                            guardarSeleccionVisto={guardarSeleccionVisto}
+                            guardarSeleccionVolverVer={guardarSeleccionVolverVer}
+                            ranking={props.ranking} setRanking={props.setRanking}/>
+                        </div>
+                        <h2 className='modal-opciones-inferiores' >
+                            <span  className='opcion-modal' onClick={  cerrarModal } > 
+                                <i  id='cerrar' className="fas fa-window-restore  "></i>
+                                <label htmlFor='cerrar'  className='modal-label' >Cerrar</label>
+                            </span>
+                            <span onClick={eliminar} className= {props.btnEliminarListaPropia ? 'opcion-modal icon2' : 'opcion-modal icon2 inactive' }  >                            
+                                <i id='eliminar'  className="fa-solid fa-circle-xmark  "></i>
+                                <label htmlFor='eliminar'  className='modal-label '  >Eliminar</label>                            
+                            </span>
+                        </h2>
                     </div>
                     
                 </div>

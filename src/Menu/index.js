@@ -110,15 +110,13 @@ function Menu2 (props){
 
     return(
         <React.Fragment>
-
             <section className="menu-grande" >
                 <div className="row">
                     <div className="col-12 d-flex align-items-center m-2 opciones-text ">
                         <h1> <i className="fas fa-film log"></i></h1><h1 className="log2" > PeList</h1>
                         <span  onClick={seleccionVisto} className={`mx-3 selec ${selectorListas === 1 ? 'selector-on': '' }`}>vistas</span>
                         <span onClick={seleccionVolverVer} className={`mx-3 selec ${selectorListas === 2 ? 'selector-on': '' }`}>volver a ver</span>
-                        <span onClick={seleccionProximaVer} className={`mx-3 selec ${selectorListas === 3 ? 'selector-on': '' }`}> proxima a ver</span>
-                        
+                        <span onClick={seleccionProximaVer} className={`mx-3 selec ${selectorListas === 3 ? 'selector-on': '' }`}> proxima a ver</span>                        
                         <span onClick={selecionPopulares} className= {`mx-3 selec text-center ${selectorApi === 1 ? 'selector-on2' :''}`} ><i className="fas fa-search-plus"></i> populares</span>
                         <span onClick={selecionEnCartelera} className={`mx-3 selec text-center ${selectorApi === 2 ? 'selector-on2' :''}`}><i className="fas fa-search-plus"></i> estrenos</span>
                     </div>

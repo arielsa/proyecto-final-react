@@ -28,12 +28,20 @@
     max-height: 300px;
     border-radius: 5%;   
 }
+.cardi{
+  background-color: var(--colorSecundario) ;
+  border: solid var(--colorAcentos) ;
+  position: absolute;
+}
 
 .card.poster-cont{
   background-color: var(--coloreSubdominate);
-  width: 70%;
+  width: 50%;
+  margin-top: 0;
 }
-
+.poster-peque{
+  height:250px ;
+}
 .mensajePeliRepetida{
   display: flex;
   text-align: center;
@@ -62,4 +70,11 @@
 }
 .comentario{
   display: grid;
+}
+.list-seleccion-form{
+  background-color:var(--colorAcentos);
+  color: var(--coloreSubdominate);
+  border: solid;
+  padding: 3px;
+  border-radius: 10px;
 }
