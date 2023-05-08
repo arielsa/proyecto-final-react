@@ -55,6 +55,7 @@ input[type='radio']:checked + label {
 }
 
 .posicionadorCarga{
+    z-index: 1;
     position: fixed;
     margin-top: 100px;
     background-color: var(--coloreSubdominate);
