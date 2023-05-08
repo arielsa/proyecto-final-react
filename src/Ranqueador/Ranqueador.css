@@ -16,6 +16,7 @@
     background-color:transparent;
 }
 .rankeador-box{
+    
     position: relative;
     background: var(--colorPredominante);
     padding: 2px 5px 3px;
@@ -25,6 +26,7 @@
 
 .rankeador-box .stars{
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 15px;
 }

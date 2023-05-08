@@ -14,9 +14,9 @@ function Ranqueador (props){
 
 
     return (
-        <div>       
-            <div className="rank">
-                <div className="rankeador-box">
+        <div className="container">       
+            <div className="rank row">
+                <div className="rankeador-box col-12">
                     <div className="stars selec">
                         {estrellas.map((estrella, index) => (
                             <i
@@ -30,7 +30,7 @@ function Ranqueador (props){
                         ))}
                     </div>                        
                 </div>
-                <div className="rankeador-box guardar-ranking" 
+                <div className="rankeador-box guardar-ranking col-12" 
                 onClick=
                 {
                     props.listRankeadaGuardar=='volverVer' ? props.guardarSeleccionVolverVer : props.guardarSeleccionVisto 

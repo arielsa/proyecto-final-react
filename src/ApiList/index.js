@@ -34,8 +34,8 @@ function ApiList (props){
                                     if(props.renderApi) { peli.url=`${URL_IMAGE + peli.poster_path}`}///////// 
                                     props.setPeliAGuardar (peli);
                                 } } > 
-                        <i className="fas fa-window-restore icon "></i></span>
-                    {peli.title}</h4>
+                        <i className="fas fa-window-restore icon "></i>{peli.title}</span>
+                    </h4>
                     </div>
                     
                 ))}

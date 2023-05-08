@@ -12,11 +12,11 @@ function FormAux(props){
     ////////////////////////////
     let overview=props.peliAGuardar.overview;
 
-     const [listar, setListar] = useState (false)
-     const [comentar,setComentar] = useState(false)
-     const [textAreaValue, setTextAreaValue] = useState('');
-     const [listSelection, setListSelection] = useState(0)
-     
+    const [listar, setListar] = useState (false)
+    const [comentar,setComentar] = useState(false)
+    const [textAreaValue, setTextAreaValue] = useState('');
+    const [listSelection, setListSelection] = useState(0)
+    
 
     const peliMarcada={
         title: props.peliAGuardar.title,
@@ -294,7 +294,7 @@ function FormAux(props){
         setListSelection(0)               
     }
 
-     const eliminar = ()=>{
+    const eliminar = ()=>{
 
         setListar(false)
         let indiceObjetoBorrar = props.pelisSeleccionadas.findIndex(function(objeto) {
@@ -323,7 +323,7 @@ function FormAux(props){
         setListSelection(0)       
     }
 
-     const crearComentario = () =>{
+    const crearComentario = () =>{
         setComentar(true)
     }
     const cerrarComentario = () =>{
@@ -342,16 +342,21 @@ function FormAux(props){
 
             <div className={'container '+ ( !props.formAux? ' inactive' :'' ) }>
                 <div className= ' row ModalBackground'>
-                    <div className="card poster-cont ">
+                    <div className="card poster-cont centrar-contenido ">
                         <div className='mt-3 poster-modal-cont'>
                         <img src={url} className='poster-peque'/> 
                         </div>
                         <div className='poster-cont '>
                             <h4 className='align-text-center'>Guardar en lista : {title}</h4>
                             <div>
-                                 <span onClick={seleccionVisto} className={`${listSelection === 1 ? 'list-seleccion-form' : ''}`} >visto |</span>
-                                <span onClick={seleccionVolverVer} className={`${listSelection === 2 ? 'list-seleccion-form' : ''}`}  > volver a ver |</span>
-                                <span onClick={seleccionProxima }  className={`${listSelection === 3 ? 'list-seleccion-form' : ''}`} > proxima a ver</span>
+                                <div className='col-12 ' >
+                                    <span onClick={seleccionVisto} className={`${listSelection === 1 ? 'list-seleccion-form' : ''}`} >visto |</span>
+                                    <span onClick={seleccionVolverVer} className={`${listSelection === 2 ? 'list-seleccion-form' : ''}`}  > volver a ver |</span>                                    
+                                </div>
+                                <div className='col-12 ' >
+                                    <span onClick={seleccionProxima }  className={`${listSelection === 3 ? 'list-seleccion-form' : ''}`} > proxima a ver</span>
+                                </div>
+                                
                                 <div className='poster-cont'>
                                     <h4 className="mensajePeliRepetida">{mensajePeliRepetida}</h4>
                                 </div>                            
@@ -360,7 +365,7 @@ function FormAux(props){
                         <div className={ listar ? '' : 'inactive'} >
                             <span onClick={crearComentario} >comentar/recomentar</span>
                         </div>
-                        <div className={comentar ? '': 'inactive' } >
+                        <div className={comentar ? 'caja-comentarios': 'inactive' } >
                             <form className={'comentario'}>
                                 <textarea class={"form-control"+''} onChange={(event) => setTextAreaValue(event.target.value)} value={textAreaValue} cols="30" rows="2"></textarea>
                                 <div className='container'>
