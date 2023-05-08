@@ -21,6 +21,10 @@ body{
 
 .selec{
     cursor: pointer;
+    border: solid;
+    border-color:var(--coloreSubdominate);
+    padding: 1px;
+    border-radius: 8px;
 }
 
 span{
@@ -70,9 +74,37 @@ text-align: center;
     height:70% ;
 }
 
+.add-movil{
+    display: none;
+}
+.lupita{
+    display:none;
+}
+.centrar-texto-menuchico{
+    text-align: center;
+}
+
+@media screen and (min-width: 544px){
+    .add-movil{
+        display: block;
+    }
+    .add{
+        display: none;
+    }
+    .lupita{
+        display: block;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .menu-chico{
         display: none;
+    }
+    .selec{
+        cursor: pointer;
+        border: none;
+        padding: 1px;
+        border-radius: 8px;
     }
 }
 

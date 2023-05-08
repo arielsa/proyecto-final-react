@@ -55,10 +55,23 @@ input[type='radio']:checked + label {
 }
 
 .posicionadorCarga{
-    position:absolute;
-    margin-top: 90px;
+    position: fixed;
+    margin-top: 100px;
+    background-color: var(--coloreSubdominate);
+    border-radius: 10px;
 }
-
+.vision-opcion{
+    display:  none;
+}
+@media screen and (min-width: 576px) {
+ 
+    .posicionadorCarga{
+        
+        margin-top: 100px;
+        background-color: var(--coloreSubdominate);
+    }  
+    
+}
 @media screen and (min-width: 768px) {
     .opciones .persistencia{        
         text-align: right;
@@ -67,4 +80,9 @@ input[type='radio']:checked + label {
         position:relative;
         margin-top: 0px;
     }
+    .vision-opcion{
+        display: block;
+        background-color: transparent;
+    } 
 }
+

@@ -127,12 +127,13 @@ function Menu2 (props){
                 <div className="row">
                     <div className="col-12 d-flex align-items-center m-2 ">
                     <h1> <i className="fas fa-film log"></i></h1><h1 className="log2" > PeList</h1>
-                    <span  onClick={seleccionVisto} className={`mx-3 selec ${selectorListas === 1 ? 'selector-on': '' } ${ listaDesplegada === 0 ? 'inactive' : '' } `}>vistas</span>
-                    <span onClick={seleccionVolverVer} className={`mx-3 selec ${selectorListas === 2 ? 'selector-on': '' }${ listaDesplegada === 0 ? 'inactive' : '' }`}>volver a ver</span>
-                    <span onClick={seleccionProximaVer} className={`mx-3 selec ${selectorListas === 3 ? 'selector-on': '' }${ listaDesplegada === 0 ? 'inactive' : '' }`}> proxima a ver</span>
-                    <span onClick={desplegarListas} class="material-symbols-outlined menu-mas ">add</span>
-                    <span onClick={selecionPopulares} className= {`mx-3 selec text-center ${selectorApi === 1 ? 'selector-on2' :''}${ listaDesplegada === 1 ? 'inactive' : '' }`} ><i className="fas fa-search-plus"></i> populares</span>
-                    <span onClick={selecionEnCartelera} className={`mx-3 selec text-center ${selectorApi === 2 ? 'selector-on2' :''}${ listaDesplegada === 1 ? 'inactive' : '' }`}><i className="fas fa-search-plus"></i> estrenos</span>
+                    <span onClick={desplegarListas} class="material-symbols-outlined menu-mas add">add</span>
+                    <span  onClick={seleccionVisto} className={`mx-1 centrar-texto-menuchico selec ${selectorListas === 1 ? 'selector-on': '' } ${ listaDesplegada === 0 ? 'inactive' : '' } `}>vistas</span>
+                    <span onClick={seleccionVolverVer} className={`mx-1 centrar-texto-menuchico selec ${selectorListas === 2 ? 'selector-on': '' }${ listaDesplegada === 0 ? 'inactive' : '' }`}>volver a ver</span>
+                    <span onClick={seleccionProximaVer} className={`mx-1 centrar-texto-menuchico selec ${selectorListas === 3 ? 'selector-on': '' }${ listaDesplegada === 0 ? 'inactive' : '' }`}> proxima a ver</span>
+                    <span onClick={desplegarListas} class="material-symbols-outlined menu-mas add-movil">add</span>
+                    <span onClick={selecionPopulares} className= {`mx-1 centrar-texto-menuchico selec text-center ${selectorApi === 1 ? 'selector-on2' :''}${ listaDesplegada === 1 ? 'inactive' : '' }`} ><i className="fas fa-search-plus lupita "></i> populares</span>
+                    <span onClick={selecionEnCartelera} className={`mx-1 centrar-texto-menuchico selec text-center ${selectorApi === 2 ? 'selector-on2' :''}${ listaDesplegada === 1 ? 'inactive' : '' }`}><i className="fas fa-search-plus lupita "></i> estrenos</span>
                     </div>
                 </div>
                 

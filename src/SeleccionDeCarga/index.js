@@ -55,16 +55,16 @@ function SeleccionDeCarga (props){
 
     return(
         <React.Fragment>
-            <h6 className="opciones" >
+            <h6 className="opciones " >
                 <div className="container posicionadorCarga ">
                     <div className="row">
                         <div className="col-12  col-md-4">
-                            <span className="vista " >Modo de vista: </span>
+                            <p className="vista vision-opcion " >Modo de vista: </p>
                             <span className="m-1 icono-seleccionador" onClick={listarConDetalle}><i className="fa-solid fa-list"> 1</i></span>
                             <span className="m-1 icono-seleccionador" onClick={listarSinDetalle} ><i className="fas fa-th-large"> 2</i></span>
                         </div>
-                        <div className="col-12  col-md-8 persistencia" >
-                            <span className="modo-guardado"  >Persistencia:</span>
+                        <div className="col-12  col-md-8 persistencia " >
+                            <p className="modo-guardado vision-opcion "  >Persistencia:</p>
                             <input type="radio" name="modo-guardado" value=  '1' id="app" checked={valorDefecto} onChange={e=>tipoDePersistencia(e)} />
                             <label htmlFor='app' >Volatil</label>
                             <input type="radio" name="modo-guardado" value= '2' id="local" onChange={e=>tipoDePersistencia(e)} />
