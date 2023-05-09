@@ -57,9 +57,12 @@ function App() {
   const [estadoBusqueda, setEstadoBusqueda ] = useState('')
   const [valorBusqueda, setValorBusqueda] = useState('')
   const [valorResultado, setValorResultado]=useState([])
+  const [buscando, setBuscando] = useState('')
+  const [text, setText]=useState('')
 
   const onSearchValue = (evento) => {
     setRenderApi(true);
+    setText('Buscando')
     setValorBusqueda(evento.target.value);
     fetchpelisSearch();
     valorResultado.length > 1 ?  seleccionador(valorResultado) : setEstadoBusqueda ('No se encontro, vuelva a intentarlo');
@@ -347,10 +350,12 @@ if (persistencia==='2'){
       setSelecStorageBorrar={setSelecStorageBorrar} 
       firebasePAV = {firebasePAV} 
       firebaseV = {firebaseV} firebaseVV = {firebaseVV}
+      setBuscando ={setBuscando} buscando = {buscando}
+      setText = {setText} text = {text}
       />
 
     <SearchPelis setRenderApi={setRenderApi} setBtnEliminarListaPropia = {setBtnEliminarListaPropia}
-    seleccionador={seleccionador} onSearchValue={onSearchValue} 
+    seleccionador={seleccionador} setText={setText} onSearchValue={onSearchValue} 
     pelisTrending={pelisTrending}/>
 
     <EstadoDeBusqueda estado={estadoBusqueda} />

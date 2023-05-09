@@ -56,3 +56,12 @@
 .inactive{
   display:none;
 }
+.ocultar-estado{
+  display: none;
+}
+@media screen and (min-width:768px ) {
+  .ocultar-estado{
+    display: block;
+
+  }
+}

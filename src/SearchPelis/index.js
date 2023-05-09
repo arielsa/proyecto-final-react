@@ -9,6 +9,7 @@ function SearchPelis (props){
         props.setRenderApi(true);    
         props.seleccionador(props.pelisTrending)
         props.setBtnEliminarListaPropia(false)
+        props.setText('Trending')
     }
 
   
